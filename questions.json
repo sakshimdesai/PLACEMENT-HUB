@@ -1,0 +1,2268 @@
+[
+
+  {
+    "question": "1. Find the missing number in the array where all numbers from 1 to N are present except one.",
+    "solution_py": "def missing_number(arr, N): return N * (N + 1) // 2 - sum(arr)",
+    "solution_java": "int missingNumber(int[] arr, int N) { int total = N * (N + 1) / 2; for (int num : arr) total -= num; return total; }",
+    "category": "dsa"
+  },
+  {
+    "question": "2. Find the first non-repeating character in a string.",
+    "solution_py": "from collections import Counter\ndef first_non_repeating(s): count = Counter(s)\n for c in s:\n  if count[c] == 1:\n   return c",
+    "solution_java": "char firstNonRepeating(String s) {\n Map<Character, Integer> map = new LinkedHashMap<>();\n for (char c : s.toCharArray()) map.put(c, map.getOrDefault(c, 0) + 1);\n for (Map.Entry<Character, Integer> entry : map.entrySet()) if (entry.getValue() == 1) return entry.getKey(); return '_'; }",
+    "category": "dsa"
+  },
+  {
+    "question": "3. Reverse a linked list.",
+    "solution_py": "def reverse_list(head):\n prev = None\n while head:\n  next_node = head.next\n  head.next = prev\n  prev = head\n  head = next_node\n return prev",
+    "solution_java": "ListNode reverseList(ListNode head) {\n ListNode prev = null;\n while (head != null) {\n  ListNode next = head.next;\n  head.next = prev;\n  prev = head;\n  head = next;\n }\n return prev;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "4. Find the intersection of two arrays.",
+    "solution_py": "def intersection(a, b): return list(set(a) & set(b))",
+    "solution_java": "int[] intersection(int[] nums1, int[] nums2) {\n Set<Integer> set1 = new HashSet<>();\n for (int n : nums1) set1.add(n);\n Set<Integer> result = new HashSet<>();\n for (int n : nums2) if (set1.contains(n)) result.add(n);\n return result.stream().mapToInt(i -> i).toArray();\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "5. Check if a linked list has a cycle.",
+    "solution_py": "def has_cycle(head):\n slow = fast = head\n while fast and fast.next:\n  slow = slow.next\n  fast = fast.next.next\n  if slow == fast:\n   return True\n return False",
+    "solution_java": "boolean hasCycle(ListNode head) {\n ListNode slow = head, fast = head;\n while (fast != null && fast.next != null) {\n  slow = slow.next;\n  fast = fast.next.next;\n  if (slow == fast) return true;\n }\n return false;\n}",
+    "category": "dsa"
+  },
+
+  {
+    "question": "6. Find the maximum subarray sum (Kadane's algorithm).",
+    "solution_py": "def max_subarray(nums):\n    max_sum = curr = nums[0]\n    for n in nums[1:]:\n        curr = max(n, curr + n)\n        max_sum = max(max_sum, curr)\n    return max_sum",
+    "solution_java": "int maxSubArray(int[] nums) {\n    int max = nums[0], curr = nums[0];\n    for (int i = 1; i < nums.length; i++) {\n        curr = Math.max(nums[i], curr + nums[i]);\n        max = Math.max(max, curr);\n    }\n    return max;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "7. Merge two sorted linked lists.",
+    "solution_py": "def merge(l1, l2):\n    dummy = curr = ListNode(0)\n    while l1 and l2:\n        if l1.val < l2.val:\n            curr.next, l1 = l1, l1.next\n        else:\n            curr.next, l2 = l2, l2.next\n        curr = curr.next\n    curr.next = l1 or l2\n    return dummy.next",
+    "solution_java": "ListNode merge(ListNode l1, ListNode l2) {\n    ListNode dummy = new ListNode(0), curr = dummy;\n    while (l1 != null && l2 != null) {\n        if (l1.val < l2.val) {\n            curr.next = l1;\n            l1 = l1.next;\n        } else {\n            curr.next = l2;\n            l2 = l2.next;\n        }\n        curr = curr.next;\n    }\n    curr.next = (l1 != null) ? l1 : l2;\n    return dummy.next;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "8. Find the lowest common ancestor in a BST.",
+    "solution_py": "def lca(root, p, q):\n    if p.val < root.val and q.val < root.val:\n        return lca(root.left, p, q)\n    elif p.val > root.val and q.val > root.val:\n        return lca(root.right, p, q)\n    else:\n        return root",
+    "solution_java": "TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {\n    if (p.val < root.val && q.val < root.val)\n        return lowestCommonAncestor(root.left, p, q);\n    else if (p.val > root.val && q.val > root.val)\n        return lowestCommonAncestor(root.right, p, q);\n    else return root;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "9. Check if two strings are anagrams.",
+    "solution_py": "def is_anagram(s, t):\n    return sorted(s) == sorted(t)",
+    "solution_java": "boolean isAnagram(String s, String t) {\n    if (s.length() != t.length()) return false;\n    int[] count = new int[26];\n    for (int i = 0; i < s.length(); i++) {\n        count[s.charAt(i) - 'a']++;\n        count[t.charAt(i) - 'a']--;\n    }\n    for (int c : count) if (c != 0) return false;\n    return true;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "10. Count the number of 1s in binary representation of a number.",
+    "solution_py": "def count_ones(n):\n    return bin(n).count('1')",
+    "solution_java": "int countOnes(int n) {\n    int count = 0;\n    while (n != 0) {\n        count += n & 1;\n        n >>>= 1;\n    }\n    return count;\n}",
+    "category": "dsa"
+  },
+  
+  {
+    "question": "21. Check if a given binary tree is a valid Binary Search Tree (BST).",
+    "solution_py": "def isValidBST(root, min_val=float('-inf'), max_val=float('inf')):\n    if not root:\n        return True\n    if not (min_val < root.val < max_val):\n        return False\n    return isValidBST(root.left, min_val, root.val) and isValidBST(root.right, root.val, max_val)",
+    "solution_java": "boolean isValidBST(TreeNode root, long min, long max) {\n    if (root == null) return true;\n    if (root.val <= min || root.val >= max) return false;\n    return isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "22. Find the kth largest element in an array.",
+    "solution_py": "import heapq\ndef findKthLargest(nums, k):\n    return heapq.nlargest(k, nums)[-1]",
+    "solution_java": "int findKthLargest(int[] nums, int k) {\n    PriorityQueue<Integer> pq = new PriorityQueue<>();\n    for (int n : nums) {\n        pq.offer(n);\n        if (pq.size() > k) pq.poll();\n    }\n    return pq.peek();\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "23. Rotate a matrix 90 degrees clockwise.",
+    "solution_py": "def rotate(matrix):\n    matrix[:] = list(zip(*matrix[::-1]))",
+    "solution_java": "void rotate(int[][] matrix) {\n    int n = matrix.length;\n    for (int i = 0; i < n; i++) {\n        for (int j = i; j < n; j++) {\n            int tmp = matrix[i][j];\n            matrix[i][j] = matrix[j][i];\n            matrix[j][i] = tmp;\n        }\n    }\n    for (int[] row : matrix) {\n        for (int i = 0; i < n / 2; i++) {\n            int tmp = row[i];\n            row[i] = row[n - i - 1];\n            row[n - i - 1] = tmp;\n        }\n    }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "24. Merge two sorted linked lists.",
+    "solution_py": "def mergeTwoLists(l1, l2):\n    if not l1 or not l2:\n        return l1 or l2\n    if l1.val < l2.val:\n        l1.next = mergeTwoLists(l1.next, l2)\n        return l1\n    else:\n        l2.next = mergeTwoLists(l1, l2.next)\n        return l2",
+    "solution_java": "ListNode mergeTwoLists(ListNode l1, ListNode l2) {\n    if (l1 == null) return l2;\n    if (l2 == null) return l1;\n    if (l1.val < l2.val) {\n        l1.next = mergeTwoLists(l1.next, l2);\n        return l1;\n    } else {\n        l2.next = mergeTwoLists(l1, l2.next);\n        return l2;\n    }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "25. Detect a cycle in a linked list.",
+    "solution_py": "def hasCycle(head):\n    slow = fast = head\n    while fast and fast.next:\n        slow = slow.next\n        fast = fast.next.next\n        if slow == fast:\n            return True\n    return False",
+    "solution_java": "boolean hasCycle(ListNode head) {\n    ListNode slow = head, fast = head;\n    while (fast != null && fast.next != null) {\n        slow = slow.next;\n        fast = fast.next.next;\n        if (slow == fast) return true;\n    }\n    return false;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "26. Implement a stack using queues.",
+    "solution_py": "from collections import deque\nclass MyStack:\n    def __init__(self):\n        self.q = deque()\n    def push(self, x):\n        self.q.append(x)\n        for _ in range(len(self.q)-1):\n            self.q.append(self.q.popleft())\n    def pop(self):\n        return self.q.popleft()\n    def top(self):\n        return self.q[0]\n    def empty(self):\n        return not self.q",
+    "solution_java": "class MyStack {\n    Queue<Integer> q = new LinkedList<>();\n    public void push(int x) {\n        q.add(x);\n        for (int i = 0; i < q.size() - 1; i++) {\n            q.add(q.remove());\n        }\n    }\n    public int pop() { return q.remove(); }\n    public int top() { return q.peek(); }\n    public boolean empty() { return q.isEmpty(); }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "27. Implement a queue using stacks.",
+    "solution_py": "class MyQueue:\n    def __init__(self):\n        self.in_stack, self.out_stack = [], []\n    def push(self, x):\n        self.in_stack.append(x)\n    def pop(self):\n        self.peek()\n        return self.out_stack.pop()\n    def peek(self):\n        if not self.out_stack:\n            while self.in_stack:\n                self.out_stack.append(self.in_stack.pop())\n        return self.out_stack[-1]\n    def empty(self):\n        return not self.in_stack and not self.out_stack",
+    "solution_java": "class MyQueue {\n    Stack<Integer> in = new Stack<>();\n    Stack<Integer> out = new Stack<>();\n    public void push(int x) { in.push(x); }\n    public int pop() {\n        peek();\n        return out.pop();\n    }\n    public int peek() {\n        if (out.isEmpty())\n            while (!in.isEmpty()) out.push(in.pop());\n        return out.peek();\n    }\n    public boolean empty() { return in.isEmpty() && out.isEmpty(); }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "28. Clone a linked list with next and random pointer.",
+    "solution_py": "def copyRandomList(head):\n    if not head: return None\n    m = {}\n    cur = head\n    while cur:\n        m[cur] = Node(cur.val)\n        cur = cur.next\n    cur = head\n    while cur:\n        m[cur].next = m.get(cur.next)\n        m[cur].random = m.get(cur.random)\n        cur = cur.next\n    return m[head]",
+    "solution_java": "public Node copyRandomList(Node head) {\n    if (head == null) return null;\n    Map<Node, Node> map = new HashMap<>();\n    Node cur = head;\n    while (cur != null) {\n        map.put(cur, new Node(cur.val));\n        cur = cur.next;\n    }\n    cur = head;\n    while (cur != null) {\n        map.get(cur).next = map.get(cur.next);\n        map.get(cur).random = map.get(cur.random);\n        cur = cur.next;\n    }\n    return map.get(head);\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "29. Reverse a linked list.",
+    "solution_py": "def reverseList(head):\n    prev = None\n    while head:\n        nxt = head.next\n        head.next = prev\n        prev = head\n        head = nxt\n    return prev",
+    "solution_java": "ListNode reverseList(ListNode head) {\n    ListNode prev = null;\n    while (head != null) {\n        ListNode next = head.next;\n        head.next = prev;\n        prev = head;\n        head = next;\n    }\n    return prev;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "30. Count number of islands in a 2D grid.",
+    "solution_py": "def numIslands(grid):\n    def dfs(i, j):\n        if 0 <= i < len(grid) and 0 <= j < len(grid[0]) and grid[i][j] == '1':\n            grid[i][j] = '0'\n            for x, y in [(1,0),(-1,0),(0,1),(0,-1)]:\n                dfs(i+x, j+y)\n            return 1\n        return 0\n    return sum(dfs(i, j) for i in range(len(grid)) for j in range(len(grid[0])))",
+    "solution_java": "public int numIslands(char[][] grid) {\n    int count = 0;\n    for (int i = 0; i < grid.length; i++) {\n        for (int j = 0; j < grid[0].length; j++) {\n            if (grid[i][j] == '1') {\n                dfs(grid, i, j);\n                count++;\n            }\n        }\n    }\n    return count;\n}\nvoid dfs(char[][] grid, int i, int j) {\n    if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j] != '1') return;\n    grid[i][j] = '0';\n    dfs(grid, i+1, j);\n    dfs(grid, i-1, j);\n    dfs(grid, i, j+1);\n    dfs(grid, i, j-1);\n}",
+    "category": "dsa"
+  },
+  
+  {
+    "question": "41. Detect a cycle in an undirected graph.",
+    "solution_py": "def has_cycle(graph):\n    visited = set()\n    def dfs(v, parent):\n        visited.add(v)\n        for neighbor in graph[v]:\n            if neighbor not in visited:\n                if dfs(neighbor, v):\n                    return True\n            elif parent != neighbor:\n                return True\n        return False\n    for node in graph:\n        if node not in visited:\n            if dfs(node, -1):\n                return True\n    return False",
+    "solution_java": "public boolean hasCycle(Map<Integer, List<Integer>> graph) {\n    Set<Integer> visited = new HashSet<>();\n    for (int node : graph.keySet()) {\n        if (!visited.contains(node)) {\n            if (dfs(node, -1, visited, graph)) return true;\n        }\n    }\n    return false;\n}\nprivate boolean dfs(int v, int parent, Set<Integer> visited, Map<Integer, List<Integer>> graph) {\n    visited.add(v);\n    for (int neighbor : graph.get(v)) {\n        if (!visited.contains(neighbor)) {\n            if (dfs(neighbor, v, visited, graph)) return true;\n        } else if (neighbor != parent) {\n            return true;\n        }\n    }\n    return false;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "42. Implement a trie (prefix tree).",
+    "solution_py": "class TrieNode:\n    def __init__(self):\n        self.children = {}\n        self.end = False\nclass Trie:\n    def __init__(self):\n        self.root = TrieNode()\n    def insert(self, word):\n        node = self.root\n        for char in word:\n            if char not in node.children:\n                node.children[char] = TrieNode()\n            node = node.children[char]\n        node.end = True\n    def search(self, word):\n        node = self.root\n        for char in word:\n            if char not in node.children:\n                return False\n            node = node.children[char]\n        return node.end",
+    "solution_java": "class TrieNode {\n    TrieNode[] children = new TrieNode[26];\n    boolean isEnd = false;\n}\nclass Trie {\n    private TrieNode root;\n    public Trie() {\n        root = new TrieNode();\n    }\n    public void insert(String word) {\n        TrieNode node = root;\n        for (char c : word.toCharArray()) {\n            int i = c - 'a';\n            if (node.children[i] == null)\n                node.children[i] = new TrieNode();\n            node = node.children[i];\n        }\n        node.isEnd = true;\n    }\n    public boolean search(String word) {\n        TrieNode node = root;\n        for (char c : word.toCharArray()) {\n            int i = c - 'a';\n            if (node.children[i] == null) return false;\n            node = node.children[i];\n        }\n        return node.isEnd;\n    }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "43. Reverse a doubly linked list.",
+    "solution_py": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.prev = None\n        self.next = None\n\ndef reverse_dll(head):\n    temp = None\n    current = head\n    while current:\n        temp = current.prev\n        current.prev = current.next\n        current.next = temp\n        current = current.prev\n    if temp:\n        head = temp.prev\n    return head",
+    "solution_java": "class Node {\n    int data;\n    Node prev, next;\n}\nNode reverse(Node head) {\n    Node temp = null;\n    Node current = head;\n    while (current != null) {\n        temp = current.prev;\n        current.prev = current.next;\n        current.next = temp;\n        current = current.prev;\n    }\n    if (temp != null) {\n        head = temp.prev;\n    }\n    return head;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "44. Convert a binary tree to its mirror tree.",
+    "solution_py": "def mirror(node):\n    if node:\n        node.left, node.right = mirror(node.right), mirror(node.left)\n    return node",
+    "solution_java": "TreeNode mirror(TreeNode node) {\n    if (node == null) return null;\n    TreeNode left = mirror(node.left);\n    TreeNode right = mirror(node.right);\n    node.left = right;\n    node.right = left;\n    return node;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "45. Find Kth largest element in an array.",
+    "solution_py": "import heapq\ndef find_kth_largest(nums, k):\n    return heapq.nlargest(k, nums)[-1]",
+    "solution_java": "public int findKthLargest(int[] nums, int k) {\n    PriorityQueue<Integer> heap = new PriorityQueue<>();\n    for (int num : nums) {\n        heap.offer(num);\n        if (heap.size() > k)\n            heap.poll();\n    }\n    return heap.peek();\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "46. Serialize and deserialize a binary tree.",
+    "solution_py": "def serialize(root):\n    res = []\n    def dfs(node):\n        if not node:\n            res.append(\"#\")\n            return\n        res.append(str(node.val))\n        dfs(node.left)\n        dfs(node.right)\n    dfs(root)\n    return ','.join(res)\n\ndef deserialize(data):\n    vals = iter(data.split(','))\n    def dfs():\n        val = next(vals)\n        if val == \"#\": return None\n        node = TreeNode(int(val))\n        node.left = dfs()\n        node.right = dfs()\n        return node\n    return dfs()",
+    "solution_java": "public class Codec {\n    public String serialize(TreeNode root) {\n        if (root == null) return \"#\";\n        return root.val + \",\" + serialize(root.left) + \",\" + serialize(root.right);\n    }\n    public TreeNode deserialize(String data) {\n        Queue<String> nodes = new LinkedList<>(Arrays.asList(data.split(\",\")));\n        return helper(nodes);\n    }\n    private TreeNode helper(Queue<String> nodes) {\n        String val = nodes.poll();\n        if (val.equals(\"#\")) return null;\n        TreeNode node = new TreeNode(Integer.parseInt(val));\n        node.left = helper(nodes);\n        node.right = helper(nodes);\n        return node;\n    }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "47. Rotate a matrix 90 degrees clockwise.",
+    "solution_py": "def rotate(matrix):\n    matrix[:] = zip(*matrix[::-1])",
+    "solution_java": "void rotate(int[][] matrix) {\n    int n = matrix.length;\n    for (int i = 0; i < n; ++i)\n        for (int j = i; j < n; ++j) {\n            int tmp = matrix[i][j];\n            matrix[i][j] = matrix[j][i];\n            matrix[j][i] = tmp;\n        }\n    for (int i = 0; i < n; ++i)\n        for (int j = 0; j < n / 2; ++j) {\n            int tmp = matrix[i][j];\n            matrix[i][j] = matrix[i][n - 1 - j];\n            matrix[i][n - 1 - j] = tmp;\n        }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "48. Find the minimum window substring.",
+    "solution_py": "from collections import Counter\ndef min_window(s, t):\n    if not t or not s: return \"\"\n    dict_t = Counter(t)\n    required = len(dict_t)\n    l, r = 0, 0\n    formed = 0\n    window_counts = {}\n    ans = float(\"inf\"), None, None\n    while r < len(s):\n        character = s[r]\n        window_counts[character] = window_counts.get(character, 0) + 1\n        if character in dict_t and window_counts[character] == dict_t[character]:\n            formed += 1\n        while l <= r and formed == required:\n            if r - l + 1 < ans[0]:\n                ans = (r - l + 1, l, r)\n            window_counts[s[l]] -= 1\n            if s[l] in dict_t and window_counts[s[l]] < dict_t[s[l]]:\n                formed -= 1\n            l += 1\n        r += 1\n    return \"\" if ans[0] == float(\"inf\") else s[ans[1]: ans[2] + 1]",
+    "solution_java": "// Too large for inline; can provide full function on request",
+    "category": "dsa"
+  },
+  {
+  "question": "49. Longest Increasing Subsequence",
+  "solution_py": "def lengthOfLIS(nums):\n    dp = []\n    for num in nums:\n        i = bisect.bisect_left(dp, num)\n        if i == len(dp):\n            dp.append(num)\n        else:\n            dp[i] = num\n    return len(dp)",
+  "solution_java": "public int lengthOfLIS(int[] nums) {\n    List<Integer> sub = new ArrayList<>();\n    for (int num : nums) {\n        int i = Collections.binarySearch(sub, num);\n        if (i < 0) i = -(i + 1);\n        if (i == sub.size()) sub.add(num);\n        else sub.set(i, num);\n    }\n    return sub.size();\n}",
+  "category": "dsa"
+},
+{
+  "question": "50. Course Schedule (Detect cycle in directed graph)",
+  "solution_py": "def canFinish(numCourses, prerequisites):\n    graph = [[] for _ in range(numCourses)]\n    for a, b in prerequisites:\n        graph[a].append(b)\n    visited = [0] * numCourses\n    def dfs(i):\n        if visited[i] == 1: return False\n        if visited[i] == 2: return True\n        visited[i] = 1\n        for j in graph[i]:\n            if not dfs(j): return False\n        visited[i] = 2\n        return True\n    return all(dfs(i) for i in range(numCourses))",
+  "solution_java": "public boolean canFinish(int numCourses, int[][] prerequisites) {\n    List<List<Integer>> graph = new ArrayList<>();\n    for (int i = 0; i < numCourses; i++) graph.add(new ArrayList<>());\n    for (int[] p : prerequisites) graph.get(p[0]).add(p[1]);\n    int[] visited = new int[numCourses];\n    for (int i = 0; i < numCourses; i++) {\n        if (!dfs(graph, visited, i)) return false;\n    }\n    return true;\n}\nprivate boolean dfs(List<List<Integer>> graph, int[] visited, int i) {\n    if (visited[i] == 1) return false;\n    if (visited[i] == 2) return true;\n    visited[i] = 1;\n    for (int j : graph.get(i)) {\n        if (!dfs(graph, visited, j)) return false;\n    }\n    visited[i] = 2;\n    return true;\n}",
+  "category": "dsa"
+},
+{
+  "question": "51. Pacific Atlantic Water Flow",
+  "solution_py": "def pacificAtlantic(heights):\n    if not heights: return []\n    m, n = len(heights), len(heights[0])\n    pacific = [[False]*n for _ in range(m)]\n    atlantic = [[False]*n for _ in range(m)]\n    def dfs(i, j, visited, prev):\n        if (i < 0 or i >= m or j < 0 or j >= n or visited[i][j] or heights[i][j] < prev):\n            return\n        visited[i][j] = True\n        for x, y in [(1,0), (-1,0), (0,1), (0,-1)]:\n            dfs(i+x, j+y, visited, heights[i][j])\n    for i in range(m):\n        dfs(i, 0, pacific, heights[i][0])\n        dfs(i, n-1, atlantic, heights[i][n-1])\n    for j in range(n):\n        dfs(0, j, pacific, heights[0][j])\n        dfs(m-1, j, atlantic, heights[m-1][j])\n    return [[i,j] for i in range(m) for j in range(n) if pacific[i][j] and atlantic[i][j]]",
+  "solution_java": "// Too large for inline. Let me know if you want Java version in full.",
+  "category": "dsa"
+},
+{
+  "question": "52. Minimum Path Sum in a Grid",
+  "solution_py": "def minPathSum(grid):\n    m, n = len(grid), len(grid[0])\n    for i in range(1, n):\n        grid[0][i] += grid[0][i-1]\n    for i in range(1, m):\n        grid[i][0] += grid[i-1][0]\n    for i in range(1, m):\n        for j in range(1, n):\n            grid[i][j] += min(grid[i-1][j], grid[i][j-1])\n    return grid[-1][-1]",
+  "solution_java": "public int minPathSum(int[][] grid) {\n    int m = grid.length, n = grid[0].length;\n    for (int i = 1; i < n; i++) grid[0][i] += grid[0][i-1];\n    for (int i = 1; i < m; i++) grid[i][0] += grid[i-1][0];\n    for (int i = 1; i < m; i++) {\n        for (int j = 1; j < n; j++) {\n            grid[i][j] += Math.min(grid[i-1][j], grid[i][j-1]);\n        }\n    }\n    return grid[m-1][n-1];\n}",
+  "category": "dsa"
+},
+{
+  "question": "53. Search in a Rotated Sorted Array",
+  "solution_py": "def search(nums, target):\n    l, r = 0, len(nums) - 1\n    while l <= r:\n        mid = (l + r) // 2\n        if nums[mid] == target:\n            return mid\n        if nums[l] <= nums[mid]:\n            if nums[l] <= target < nums[mid]:\n                r = mid - 1\n            else:\n                l = mid + 1\n        else:\n            if nums[mid] < target <= nums[r]:\n                l = mid + 1\n            else:\n                r = mid - 1\n    return -1",
+  "solution_java": "public int search(int[] nums, int target) {\n    int l = 0, r = nums.length - 1;\n    while (l <= r) {\n        int mid = (l + r) / 2;\n        if (nums[mid] == target) return mid;\n        if (nums[l] <= nums[mid]) {\n            if (nums[l] <= target && target < nums[mid]) r = mid - 1;\n            else l = mid + 1;\n        } else {\n            if (nums[mid] < target && target <= nums[r]) l = mid + 1;\n            else r = mid - 1;\n        }\n    }\n    return -1;\n}",
+  "category": "dsa"
+},
+{
+  "question": "54. Binary Tree Level Order Traversal",
+  "solution_py": "def levelOrder(root):\n    if not root: return []\n    res, queue = [], [root]\n    while queue:\n        res.append([node.val for node in queue])\n        queue = [child for node in queue for child in (node.left, node.right) if child]\n    return res",
+  "solution_java": "public List<List<Integer>> levelOrder(TreeNode root) {\n    List<List<Integer>> res = new ArrayList<>();\n    if (root == null) return res;\n    Queue<TreeNode> queue = new LinkedList<>();\n    queue.add(root);\n    while (!queue.isEmpty()) {\n        int size = queue.size();\n        List<Integer> level = new ArrayList<>();\n        for (int i = 0; i < size; i++) {\n            TreeNode node = queue.poll();\n            level.add(node.val);\n            if (node.left != null) queue.add(node.left);\n            if (node.right != null) queue.add(node.right);\n        }\n        res.add(level);\n    }\n    return res;\n}",
+  "category": "dsa"
+},
+{
+  "question": "55. Sort Colors (Dutch National Flag Problem)",
+  "solution_py": "def sortColors(nums):\n    l, r, i = 0, len(nums) - 1, 0\n    while i <= r:\n        if nums[i] == 0:\n            nums[l], nums[i] = nums[i], nums[l]\n            l += 1\n            i += 1\n        elif nums[i] == 2:\n            nums[r], nums[i] = nums[i], nums[r]\n            r -= 1\n        else:\n            i += 1",
+  "solution_java": "public void sortColors(int[] nums) {\n    int l = 0, r = nums.length - 1, i = 0;\n    while (i <= r) {\n        if (nums[i] == 0) {\n            int temp = nums[l]; nums[l++] = nums[i]; nums[i++] = temp;\n        } else if (nums[i] == 2) {\n            int temp = nums[r]; nums[r--] = nums[i]; nums[i] = temp;\n        } else {\n            i++;\n        }\n    }\n}",
+  "category": "dsa"
+},
+{
+  "question": "56. Kth Smallest Element in a BST",
+  "solution_py": "def kthSmallest(root, k):\n    stack = []\n    while True:\n        while root:\n            stack.append(root)\n            root = root.left\n        root = stack.pop()\n        k -= 1\n        if not k:\n            return root.val\n        root = root.right",
+  "solution_java": "public int kthSmallest(TreeNode root, int k) {\n    Stack<TreeNode> stack = new Stack<>();\n    while (true) {\n        while (root != null) {\n            stack.push(root);\n            root = root.left;\n        }\n        root = stack.pop();\n        if (--k == 0) return root.val;\n        root = root.right;\n    }\n}",
+  "category": "dsa"
+},
+{
+  "question": "57. Word Break Problem",
+  "solution_py": "def wordBreak(s, wordDict):\n    dp = [False] * (len(s)+1)\n    dp[0] = True\n    wordSet = set(wordDict)\n    for i in range(1, len(s)+1):\n        for j in range(i):\n            if dp[j] and s[j:i] in wordSet:\n                dp[i] = True\n                break\n    return dp[-1]",
+  "solution_java": "public boolean wordBreak(String s, List<String> wordDict) {\n    Set<String> wordSet = new HashSet<>(wordDict);\n    boolean[] dp = new boolean[s.length()+1];\n    dp[0] = true;\n    for (int i = 1; i <= s.length(); i++) {\n        for (int j = 0; j < i; j++) {\n            if (dp[j] && wordSet.contains(s.substring(j, i))) {\n                dp[i] = true;\n                break;\n            }\n        }\n    }\n    return dp[s.length()];\n}",
+  "category": "dsa"
+},
+{
+  "question": "58. Implement Trie (Prefix Tree)",
+  "solution_py": "class Trie:\n    def __init__(self):\n        self.children = {}\n        self.end = False\n    def insert(self, word):\n        node = self\n        for char in word:\n            if char not in node.children:\n                node.children[char] = Trie()\n            node = node.children[char]\n        node.end = True\n    def search(self, word):\n        node = self\n        for char in word:\n            if char not in node.children:\n                return False\n            node = node.children[char]\n        return node.end\n    def startsWith(self, prefix):\n        node = self\n        for char in prefix:\n            if char not in node.children:\n                return False\n            node = node.children[char]\n        return True",
+  "solution_java": "class Trie {\n    class TrieNode {\n        Map<Character, TrieNode> children = new HashMap<>();\n        boolean endOfWord = false;\n    }\n    TrieNode root = new TrieNode();\n    public void insert(String word) {\n        TrieNode node = root;\n        for (char c : word.toCharArray()) {\n            node = node.children.computeIfAbsent(c, k -> new TrieNode());\n        }\n        node.endOfWord = true;\n    }\n    public boolean search(String word) {\n        TrieNode node = root;\n        for (char c : word.toCharArray()) {\n            node = node.children.get(c);\n            if (node == null) return false;\n        }\n        return node.endOfWord;\n    }\n    public boolean startsWith(String prefix) {\n        TrieNode node = root;\n        for (char c : prefix.toCharArray()) {\n            node = node.children.get(c);\n            if (node == null) return false;\n        }\n        return true;\n    }\n}",
+  "category": "dsa"
+},
+{
+  "question": "59. Clone Graph",
+  "solution_py": "def cloneGraph(node):\n    if not node:\n        return None\n    visited = {}\n    def dfs(n):\n        if n in visited:\n            return visited[n]\n        copy = Node(n.val)\n        visited[n] = copy\n        for nei in n.neighbors:\n            copy.neighbors.append(dfs(nei))\n        return copy\n    return dfs(node)",
+  "solution_java": "// Java code omitted for brevity. Ask if needed.",
+  "category": "dsa"
+},
+{
+  "question": "60. Diameter of Binary Tree",
+  "solution_py": "def diameterOfBinaryTree(root):\n    self.diameter = 0\n    def depth(node):\n        if not node: return 0\n        left = depth(node.left)\n        right = depth(node.right)\n        self.diameter = max(self.diameter, left + right)\n        return 1 + max(left, right)\n    depth(root)\n    return self.diameter",
+  "solution_java": "public int diameterOfBinaryTree(TreeNode root) {\n    int[] diameter = new int[1];\n    depth(root, diameter);\n    return diameter[0];\n}\nprivate int depth(TreeNode node, int[] diameter) {\n    if (node == null) return 0;\n    int left = depth(node.left, diameter);\n    int right = depth(node.right, diameter);\n    diameter[0] = Math.max(diameter[0], left + right);\n    return 1 + Math.max(left, right);\n}",
+  "category": "dsa"
+},
+{
+  "question": "61. Spiral Matrix",
+  "solution_py": "def spiralOrder(matrix):\n    res = []\n    while matrix:\n        res += matrix.pop(0)\n        if matrix and matrix[0]:\n            for row in matrix:\n                res.append(row.pop())\n        if matrix:\n            res += matrix.pop()[::-1]\n        if matrix and matrix[0]:\n            for row in matrix[::-1]:\n                res.append(row.pop(0))\n    return res",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "62. Permutations",
+  "solution_py": "def permute(nums):\n    res = []\n    def backtrack(path, remaining):\n        if not remaining:\n            res.append(path)\n        for i in range(len(remaining)):\n            backtrack(path + [remaining[i]], remaining[:i] + remaining[i+1:])\n    backtrack([], nums)\n    return res",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "63. Subsets",
+  "solution_py": "def subsets(nums):\n    res = []\n    def backtrack(start, path):\n        res.append(path[:])\n        for i in range(start, len(nums)):\n            path.append(nums[i])\n            backtrack(i+1, path)\n            path.pop()\n    backtrack(0, [])\n    return res",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "64. Search a 2D Matrix",
+  "solution_py": "def searchMatrix(matrix, target):\n    if not matrix: return False\n    m, n = len(matrix), len(matrix[0])\n    l, r = 0, m * n - 1\n    while l <= r:\n        mid = (l + r) // 2\n        val = matrix[mid // n][mid % n]\n        if val == target:\n            return True\n        elif val < target:\n            l = mid + 1\n        else:\n            r = mid - 1\n    return False",
+  "solution_java": "public boolean searchMatrix(int[][] matrix, int target) {\n    int m = matrix.length, n = matrix[0].length;\n    int l = 0, r = m * n - 1;\n    while (l <= r) {\n        int mid = (l + r) / 2;\n        int val = matrix[mid / n][mid % n];\n        if (val == target) return true;\n        else if (val < target) l = mid + 1;\n        else r = mid - 1;\n    }\n    return false;\n}",
+  "category": "dsa"
+},
+{
+  "question": "65. Decode Ways",
+  "solution_py": "def numDecodings(s):\n    if not s or s[0] == '0': return 0\n    dp = [1, 1] + [0] * (len(s) - 1)\n    for i in range(2, len(s) + 1):\n        if s[i - 1] != '0':\n            dp[i] += dp[i - 1]\n        if 10 <= int(s[i - 2:i]) <= 26:\n            dp[i] += dp[i - 2]\n    return dp[len(s)]",
+  "solution_java": "public int numDecodings(String s) {\n    if (s == null || s.length() == 0 || s.charAt(0) == '0') return 0;\n    int[] dp = new int[s.length() + 1];\n    dp[0] = dp[1] = 1;\n    for (int i = 2; i <= s.length(); i++) {\n        if (s.charAt(i - 1) != '0') dp[i] += dp[i - 1];\n        int twoDigit = Integer.parseInt(s.substring(i - 2, i));\n        if (twoDigit >= 10 && twoDigit <= 26) dp[i] += dp[i - 2];\n    }\n    return dp[s.length()];\n}",
+  "category": "dsa"
+},
+{
+  "question": "66. Coin Change",
+  "solution_py": "def coinChange(coins, amount):\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0\n    for coin in coins:\n        for i in range(coin, amount + 1):\n            dp[i] = min(dp[i], dp[i - coin] + 1)\n    return dp[amount] if dp[amount] != float('inf') else -1",
+  "solution_java": "public int coinChange(int[] coins, int amount) {\n    int[] dp = new int[amount + 1];\n    Arrays.fill(dp, amount + 1);\n    dp[0] = 0;\n    for (int coin : coins) {\n        for (int i = coin; i <= amount; i++) {\n            dp[i] = Math.min(dp[i], dp[i - coin] + 1);\n        }\n    }\n    return dp[amount] > amount ? -1 : dp[amount];\n}",
+  "category": "dsa"
+},
+{
+  "question": "67. Maximum Product Subarray",
+  "solution_py": "def maxProduct(nums):\n    res = max_prod = min_prod = nums[0]\n    for num in nums[1:]:\n        temp = max(num, max_prod * num, min_prod * num)\n        min_prod = min(num, max_prod * num, min_prod * num)\n        max_prod = temp\n        res = max(res, max_prod)\n    return res",
+  "solution_java": "public int maxProduct(int[] nums) {\n    int maxProd = nums[0], minProd = nums[0], res = nums[0];\n    for (int i = 1; i < nums.length; i++) {\n        int temp = maxProd;\n        maxProd = Math.max(nums[i], Math.max(maxProd * nums[i], minProd * nums[i]));\n        minProd = Math.min(nums[i], Math.min(temp * nums[i], minProd * nums[i]));\n        res = Math.max(res, maxProd);\n    }\n    return res;\n}",
+  "category": "dsa"
+},
+{
+  "question": "68. Validate Binary Search Tree",
+  "solution_py": "def isValidBST(root):\n    def helper(node, low=float('-inf'), high=float('inf')):\n        if not node: return True\n        if not (low < node.val < high): return False\n        return helper(node.left, low, node.val) and helper(node.right, node.val, high)\n    return helper(root)",
+  "solution_java": "public boolean isValidBST(TreeNode root) {\n    return helper(root, Long.MIN_VALUE, Long.MAX_VALUE);\n}\nprivate boolean helper(TreeNode node, long low, long high) {\n    if (node == null) return true;\n    if (node.val <= low || node.val >= high) return false;\n    return helper(node.left, low, node.val) && helper(node.right, node.val, high);\n}",
+  "category": "dsa"
+},
+{
+  "question": "69. Course Schedule",
+  "solution_py": "def canFinish(numCourses, prerequisites):\n    graph = {i: [] for i in range(numCourses)}\n    for a, b in prerequisites:\n        graph[a].append(b)\n    visited = {}\n    def dfs(course):\n        if course in visited:\n            return visited[course]\n        visited[course] = False\n        for pre in graph[course]:\n            if not dfs(pre): return False\n        visited[course] = True\n        return True\n    return all(dfs(c) for c in range(numCourses))",
+  "solution_java": "public boolean canFinish(int numCourses, int[][] prerequisites) {\n    List<Integer>[] graph = new ArrayList[numCourses];\n    for (int i = 0; i < numCourses; i++) graph[i] = new ArrayList<>();\n    for (int[] pre : prerequisites) graph[pre[0]].add(pre[1]);\n    int[] visited = new int[numCourses];\n    for (int i = 0; i < numCourses; i++) {\n        if (!dfs(i, graph, visited)) return false;\n    }\n    return true;\n}\nprivate boolean dfs(int course, List<Integer>[] graph, int[] visited) {\n    if (visited[course] == 1) return false;\n    if (visited[course] == 2) return true;\n    visited[course] = 1;\n    for (int pre : graph[course]) {\n        if (!dfs(pre, graph, visited)) return false;\n    }\n    visited[course] = 2;\n    return true;\n}",
+  "category": "dsa"
+},
+{
+  "question": "70. Sliding Window Maximum",
+  "solution_py": "from collections import deque\n\ndef maxSlidingWindow(nums, k):\n    dq = deque()\n    res = []\n    for i in range(len(nums)):\n        while dq and dq[0] <= i - k:\n            dq.popleft()\n        while dq and nums[dq[-1]] < nums[i]:\n            dq.pop()\n        dq.append(i)\n        if i >= k - 1:\n            res.append(nums[dq[0]])\n    return res",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "71. Top K Frequent Elements",
+  "solution_py": "from collections import Counter\nimport heapq\n\ndef topKFrequent(nums, k):\n    count = Counter(nums)\n    return heapq.nlargest(k, count.keys(), key=count.get)",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "72. Search in Rotated Sorted Array",
+  "solution_py": "def search(nums, target):\n    l, r = 0, len(nums) - 1\n    while l <= r:\n        mid = (l + r) // 2\n        if nums[mid] == target:\n            return mid\n        if nums[l] <= nums[mid]:\n            if nums[l] <= target < nums[mid]:\n                r = mid - 1\n            else:\n                l = mid + 1\n        else:\n            if nums[mid] < target <= nums[r]:\n                l = mid + 1\n            else:\n                r = mid - 1\n    return -1",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "73. House Robber",
+  "solution_py": "def rob(nums):\n    prev = curr = 0\n    for num in nums:\n        prev, curr = curr, max(curr, prev + num)\n    return curr",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "74. House Robber II",
+  "solution_py": "def rob(nums):\n    if len(nums) == 1: return nums[0]\n    def helper(nums):\n        prev = curr = 0\n        for num in nums:\n            prev, curr = curr, max(curr, prev + num)\n        return curr\n    return max(helper(nums[1:]), helper(nums[:-1]))",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "75. Bitwise AND of Numbers Range",
+  "solution_py": "def rangeBitwiseAnd(left, right):\n    shift = 0\n    while left < right:\n        left >>= 1\n        right >>= 1\n        shift += 1\n    return left << shift",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "76. Number of Islands",
+  "solution_py": "def numIslands(grid):\n    if not grid: return 0\n    def dfs(i, j):\n        if i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0]) or grid[i][j] != '1':\n            return\n        grid[i][j] = '0'\n        for x, y in [(0,1), (1,0), (-1,0), (0,-1)]:\n            dfs(i+x, j+y)\n    count = 0\n    for i in range(len(grid)):\n        for j in range(len(grid[0])):\n            if grid[i][j] == '1':\n                dfs(i, j)\n                count += 1\n    return count",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "77. Evaluate Reverse Polish Notation",
+  "solution_py": "def evalRPN(tokens):\n    stack = []\n    for token in tokens:\n        if token not in '+-*/':\n            stack.append(int(token))\n        else:\n            b, a = stack.pop(), stack.pop()\n            if token == '+': stack.append(a + b)\n            elif token == '-': stack.append(a - b)\n            elif token == '*': stack.append(a * b)\n            else: stack.append(int(a / b))\n    return stack[0]",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "78. Implement Stack using Queues",
+  "solution_py": "from collections import deque\nclass MyStack:\n    def __init__(self):\n        self.q = deque()\n    def push(self, x):\n        self.q.append(x)\n        for _ in range(len(self.q) - 1):\n            self.q.append(self.q.popleft())\n    def pop(self):\n        return self.q.popleft()\n    def top(self):\n        return self.q[0]\n    def empty(self):\n        return not self.q",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "79. Kth Smallest Element in a BST",
+  "solution_py": "def kthSmallest(root, k):\n    stack = []\n    while True:\n        while root:\n            stack.append(root)\n            root = root.left\n        root = stack.pop()\n        k -= 1\n        if k == 0:\n            return root.val\n        root = root.right",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+{
+  "question": "80. Implement Queue using Stacks",
+  "solution_py": "class MyQueue:\n    def __init__(self):\n        self.in_stack = []\n        self.out_stack = []\n    def push(self, x):\n        self.in_stack.append(x)\n    def pop(self):\n        self.peek()\n        return self.out_stack.pop()\n    def peek(self):\n        if not self.out_stack:\n            while self.in_stack:\n                self.out_stack.append(self.in_stack.pop())\n        return self.out_stack[-1]\n    def empty(self):\n        return not self.in_stack and not self.out_stack",
+  "solution_java": "// Java version available on request.",
+  "category": "dsa"
+},
+
+  {
+    "question": "61. Find the length of the longest substring without repeating characters.",
+    "solution_py": "def length_of_longest_substring(s):\n    char_set = set()\n    l = 0\n    max_len = 0\n    for r in range(len(s)):\n        while s[r] in char_set:\n            char_set.remove(s[l])\n            l += 1\n        char_set.add(s[r])\n        max_len = max(max_len, r - l + 1)\n    return max_len",
+    "solution_java": "int lengthOfLongestSubstring(String s) {\n    Set<Character> set = new HashSet<>();\n    int left = 0, max = 0;\n    for (int right = 0; right < s.length(); right++) {\n        while (set.contains(s.charAt(right))) {\n            set.remove(s.charAt(left++));\n        }\n        set.add(s.charAt(right));\n        max = Math.max(max, right - left + 1);\n    }\n    return max;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "62. Merge k sorted linked lists.",
+    "solution_py": "from heapq import heappush, heappop\n\ndef merge_k_lists(lists):\n    heap = []\n    for i, node in enumerate(lists):\n        if node:\n            heappush(heap, (node.val, i, node))\n    dummy = ListNode(0)\n    curr = dummy\n    while heap:\n        val, i, node = heappop(heap)\n        curr.next = node\n        curr = curr.next\n        if node.next:\n            heappush(heap, (node.next.val, i, node.next))\n    return dummy.next",
+    "solution_java": "public ListNode mergeKLists(ListNode[] lists) {\n    PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);\n    for (ListNode node : lists) {\n        if (node != null) pq.add(node);\n    }\n    ListNode dummy = new ListNode(0), curr = dummy;\n    while (!pq.isEmpty()) {\n        ListNode node = pq.poll();\n        curr.next = node;\n        curr = curr.next;\n        if (node.next != null) pq.add(node.next);\n    }\n    return dummy.next;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "63. Check if two strings are rotations of each other.",
+    "solution_py": "def are_rotations(s1, s2):\n    return len(s1) == len(s2) and s2 in (s1 + s1)",
+    "solution_java": "boolean areRotations(String s1, String s2) {\n    return s1.length() == s2.length() && (s1 + s1).contains(s2);\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "64. Print all permutations of a string.",
+    "solution_py": "from itertools import permutations\n\ndef string_permutations(s):\n    return [''.join(p) for p in permutations(s)]",
+    "solution_java": "void permute(String str, String ans) {\n    if (str.length() == 0) {\n        System.out.println(ans);\n        return;\n    }\n    for (int i = 0; i < str.length(); i++) {\n        char ch = str.charAt(i);\n        String ros = str.substring(0, i) + str.substring(i + 1);\n        permute(ros, ans + ch);\n    }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "65. Given an array of integers, return indices of two numbers such that they add up to a target.",
+    "solution_py": "def two_sum(nums, target):\n    lookup = {}\n    for i, num in enumerate(nums):\n        if target - num in lookup:\n            return [lookup[target - num], i]\n        lookup[num] = i",
+    "solution_java": "int[] twoSum(int[] nums, int target) {\n    Map<Integer, Integer> map = new HashMap<>();\n    for (int i = 0; i < nums.length; i++) {\n        int complement = target - nums[i];\n        if (map.containsKey(complement)) {\n            return new int[] { map.get(complement), i };\n        }\n        map.put(nums[i], i);\n    }\n    return new int[] {};\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "66. Reverse nodes in k-group in a linked list.",
+    "solution_py": "def reverseKGroup(head, k):\n    dummy = ListNode(0)\n    dummy.next = head\n    prev = dummy\n    while True:\n        tail = prev\n        for _ in range(k):\n            tail = tail.next\n            if not tail:\n                return dummy.next\n        nex = tail.next\n        head, tail = reverse(prev.next, tail)\n        prev.next = head\n        tail.next = nex\n        prev = tail\n\ndef reverse(head, tail):\n    prev = tail.next\n    p = head\n    while prev != tail:\n        nex = p.next\n        p.next = prev\n        prev = p\n        p = nex\n    return tail, head",
+    "solution_java": "// Omitted due to size, available on request",
+    "category": "dsa"
+  },
+  {
+    "question": "67. Rotate a matrix 90 degrees clockwise.",
+    "solution_py": "def rotate(matrix):\n    matrix[:] = zip(*matrix[::-1])",
+    "solution_java": "void rotate(int[][] matrix) {\n    int n = matrix.length;\n    for (int i = 0; i < n; i++) {\n        for (int j = i; j < n; j++) {\n            int temp = matrix[i][j];\n            matrix[i][j] = matrix[j][i];\n            matrix[j][i] = temp;\n        }\n    }\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < n / 2; j++) {\n            int temp = matrix[i][j];\n            matrix[i][j] = matrix[i][n - j - 1];\n            matrix[i][n - j - 1] = temp;\n        }\n    }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "68. Minimum window substring that contains all characters of another string.",
+    "solution_py": "from collections import Counter\n\ndef min_window(s, t):\n    if not t or not s:\n        return \"\"\n    count_t = Counter(t)\n    window = {}\n    have, need = 0, len(count_t)\n    res, res_len = [-1, -1], float(\"inf\")\n    l = 0\n    for r in range(len(s)):\n        c = s[r]\n        window[c] = window.get(c, 0) + 1\n        if c in count_t and window[c] == count_t[c]:\n            have += 1\n        while have == need:\n            if (r - l + 1) < res_len:\n                res = [l, r]\n                res_len = r - l + 1\n            window[s[l]] -= 1\n            if s[l] in count_t and window[s[l]] < count_t[s[l]]:\n                have -= 1\n            l += 1\n    l, r = res\n    return s[l:r+1] if res_len != float(\"inf\") else \"\"",
+    "solution_java": "// Omitted due to size, available on request",
+    "category": "dsa"
+  },
+  {
+    "question": "69. Convert a binary tree to its mirror tree.",
+    "solution_py": "def mirror(root):\n    if root is None:\n        return None\n    root.left, root.right = mirror(root.right), mirror(root.left)\n    return root",
+    "solution_java": "TreeNode mirror(TreeNode node) {\n    if (node == null) return null;\n    TreeNode left = mirror(node.left);\n    TreeNode right = mirror(node.right);\n    node.left = right;\n    node.right = left;\n    return node;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "70. Implement pow(x, n).",
+    "solution_py": "def myPow(x, n):\n    if n == 0:\n        return 1\n    if n < 0:\n        x = 1 / x\n        n = -n\n    half = myPow(x, n // 2)\n    return half * half if n % 2 == 0 else half * half * x",
+    "solution_java": "double myPow(double x, int n) {\n    if (n == 0) return 1;\n    if (n < 0) {\n        x = 1 / x;\n        n = -n;\n    }\n    double half = myPow(x, n / 2);\n    return (n % 2 == 0) ? half * half : half * half * x;\n}",
+    "category": "dsa"
+  },
+  
+  {
+    "question": "61. Sort a stack using another stack.",
+    "solution_py": "def sort_stack(stack):\n    temp_stack = []\n    while stack:\n        tmp = stack.pop()\n        while temp_stack and temp_stack[-1] > tmp:\n            stack.append(temp_stack.pop())\n        temp_stack.append(tmp)\n    return temp_stack",
+    "solution_java": "public Stack<Integer> sortStack(Stack<Integer> stack) {\n    Stack<Integer> tempStack = new Stack<>();\n    while (!stack.isEmpty()) {\n        int tmp = stack.pop();\n        while (!tempStack.isEmpty() && tempStack.peek() > tmp) {\n            stack.push(tempStack.pop());\n        }\n        tempStack.push(tmp);\n    }\n    return tempStack;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "62. Find the length of the longest valid parentheses substring.",
+    "solution_py": "def longestValidParentheses(s):\n    stack = [-1]\n    max_len = 0\n    for i, c in enumerate(s):\n        if c == '(':\n            stack.append(i)\n        else:\n            stack.pop()\n            if not stack:\n                stack.append(i)\n            else:\n                max_len = max(max_len, i - stack[-1])\n    return max_len",
+    "solution_java": "public int longestValidParentheses(String s) {\n    Stack<Integer> stack = new Stack<>();\n    stack.push(-1);\n    int maxLen = 0;\n    for (int i = 0; i < s.length(); i++) {\n        if (s.charAt(i) == '(') stack.push(i);\n        else {\n            stack.pop();\n            if (stack.isEmpty()) stack.push(i);\n            else maxLen = Math.max(maxLen, i - stack.peek());\n        }\n    }\n    return maxLen;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "63. Find the minimum element in a rotated sorted array.",
+    "solution_py": "def findMin(nums):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        mid = (left + right) // 2\n        if nums[mid] > nums[right]:\n            left = mid + 1\n        else:\n            right = mid\n    return nums[left]",
+    "solution_java": "public int findMin(int[] nums) {\n    int left = 0, right = nums.length - 1;\n    while (left < right) {\n        int mid = (left + right) / 2;\n        if (nums[mid] > nums[right]) left = mid + 1;\n        else right = mid;\n    }\n    return nums[left];\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "64. Check if an array can be divided into pairs whose sum is divisible by k.",
+    "solution_py": "def canArrange(arr, k):\n    count = [0] * k\n    for num in arr:\n        count[num % k] += 1\n    if count[0] % 2 != 0:\n        return False\n    for i in range(1, k // 2 + 1):\n        if count[i] != count[k - i]:\n            return False\n    return True",
+    "solution_java": "public boolean canArrange(int[] arr, int k) {\n    int[] count = new int[k];\n    for (int num : arr) count[(num % k + k) % k]++;\n    if (count[0] % 2 != 0) return false;\n    for (int i = 1; i < k; i++) {\n        if (count[i] != count[k - i]) return false;\n    }\n    return true;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "65. Construct Binary Tree from Inorder and Preorder traversal.",
+    "solution_py": "def buildTree(preorder, inorder):\n    if not preorder or not inorder:\n        return None\n    root = TreeNode(preorder[0])\n    mid = inorder.index(preorder[0])\n    root.left = buildTree(preorder[1:mid+1], inorder[:mid])\n    root.right = buildTree(preorder[mid+1:], inorder[mid+1:])\n    return root",
+    "solution_java": "public TreeNode buildTree(int[] preorder, int[] inorder) {\n    Map<Integer, Integer> inMap = new HashMap<>();\n    for (int i = 0; i < inorder.length; i++) inMap.put(inorder[i], i);\n    return helper(preorder, 0, preorder.length - 1, 0, inorder.length - 1, inMap);\n}\nprivate TreeNode helper(int[] pre, int ps, int pe, int is, int ie, Map<Integer, Integer> inMap) {\n    if (ps > pe || is > ie) return null;\n    TreeNode root = new TreeNode(pre[ps]);\n    int inRoot = inMap.get(pre[ps]);\n    int numsLeft = inRoot - is;\n    root.left = helper(pre, ps + 1, ps + numsLeft, is, inRoot - 1, inMap);\n    root.right = helper(pre, ps + numsLeft + 1, pe, inRoot + 1, ie, inMap);\n    return root;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "66. Rotate a linked list to the right by k places.",
+    "solution_py": "def rotateRight(head, k):\n    if not head or not head.next: return head\n    length = 1\n    tail = head\n    while tail.next:\n        tail = tail.next\n        length += 1\n    k %= length\n    if k == 0: return head\n    tail.next = head\n    for _ in range(length - k):\n        tail = tail.next\n    new_head = tail.next\n    tail.next = None\n    return new_head",
+    "solution_java": "public ListNode rotateRight(ListNode head, int k) {\n    if (head == null || head.next == null) return head;\n    ListNode tail = head;\n    int length = 1;\n    while (tail.next != null) {\n        tail = tail.next;\n        length++;\n    }\n    k %= length;\n    if (k == 0) return head;\n    tail.next = head;\n    for (int i = 0; i < length - k; i++) tail = tail.next;\n    ListNode newHead = tail.next;\n    tail.next = null;\n    return newHead;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "67. Check if a string is a rotation of another.",
+    "solution_py": "def isRotation(s1, s2):\n    return len(s1) == len(s2) and s2 in s1 + s1",
+    "solution_java": "public boolean isRotation(String s1, String s2) {\n    return s1.length() == s2.length() && (s1 + s1).contains(s2);\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "68. Implement a LRU Cache.",
+    "solution_py": "from collections import OrderedDict\nclass LRUCache:\n    def __init__(self, capacity):\n        self.cache = OrderedDict()\n        self.capacity = capacity\n    def get(self, key):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n            return self.cache[key]\n        return -1\n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)",
+    "solution_java": "class LRUCache extends LinkedHashMap<Integer, Integer> {\n    private int capacity;\n    public LRUCache(int capacity) {\n        super(capacity, 0.75f, true);\n        this.capacity = capacity;\n    }\n    public int get(int key) {\n        return super.getOrDefault(key, -1);\n    }\n    public void put(int key, int value) {\n        super.put(key, value);\n    }\n    protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {\n        return size() > capacity;\n    }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "69. Find the longest common prefix among an array of strings.",
+    "solution_py": "def longestCommonPrefix(strs):\n    if not strs: return \"\"\n    prefix = strs[0]\n    for s in strs[1:]:\n        while not s.startswith(prefix):\n            prefix = prefix[:-1]\n            if not prefix: return \"\"\n    return prefix",
+    "solution_java": "public String longestCommonPrefix(String[] strs) {\n    if (strs.length == 0) return \"\";\n    String prefix = strs[0];\n    for (int i = 1; i < strs.length; i++) {\n        while (strs[i].indexOf(prefix) != 0) {\n            prefix = prefix.substring(0, prefix.length() - 1);\n            if (prefix.isEmpty()) return \"\";\n        }\n    }\n    return prefix;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "70. Print all permutations of a string.",
+    "solution_py": "def permute(s):\n    if len(s) == 0: return ['']\n    res = []\n    for i, c in enumerate(s):\n        for perm in permute(s[:i] + s[i+1:]):\n            res.append(c + perm)\n    return res",
+    "solution_java": "public void permute(String s, String ans) {\n    if (s.length() == 0) {\n        System.out.println(ans);\n        return;\n    }\n    for (int i = 0; i < s.length(); i++) {\n        char ch = s.charAt(i);\n        String ros = s.substring(0, i) + s.substring(i + 1);\n        permute(ros, ans + ch);\n    }\n}",
+    "category": "dsa"
+  },
+  
+  {
+    "question": "81. Check if a binary tree is balanced.",
+    "solution_py": "def isBalanced(root):\n    def check(node):\n        if not node: return 0\n        left = check(node.left)\n        if left == -1: return -1\n        right = check(node.right)\n        if right == -1: return -1\n        if abs(left - right) > 1: return -1\n        return max(left, right) + 1\n    return check(root) != -1",
+    "solution_java": "public boolean isBalanced(TreeNode root) {\n    return check(root) != -1;\n}\nprivate int check(TreeNode node) {\n    if (node == null) return 0;\n    int left = check(node.left);\n    if (left == -1) return -1;\n    int right = check(node.right);\n    if (right == -1) return -1;\n    if (Math.abs(left - right) > 1) return -1;\n    return Math.max(left, right) + 1;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "82. Flatten a binary tree to a linked list.",
+    "solution_py": "def flatten(root):\n    if not root: return\n    flatten(root.left)\n    flatten(root.right)\n    if root.left:\n        right = root.right\n        root.right = root.left\n        root.left = None\n        cur = root.right\n        while cur.right:\n            cur = cur.right\n        cur.right = right",
+    "solution_java": "public void flatten(TreeNode root) {\n    if (root == null) return;\n    flatten(root.left);\n    flatten(root.right);\n    if (root.left != null) {\n        TreeNode temp = root.right;\n        root.right = root.left;\n        root.left = null;\n        TreeNode t = root.right;\n        while (t.right != null) t = t.right;\n        t.right = temp;\n    }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "83. Find the largest rectangular area in a histogram.",
+    "solution_py": "def largestRectangleArea(heights):\n    stack = []\n    max_area = 0\n    heights.append(0)\n    for i, h in enumerate(heights):\n        while stack and heights[stack[-1]] > h:\n            height = heights[stack.pop()]\n            width = i if not stack else i - stack[-1] - 1\n            max_area = max(max_area, height * width)\n        stack.append(i)\n    return max_area",
+    "solution_java": "public int largestRectangleArea(int[] heights) {\n    Stack<Integer> stack = new Stack<>();\n    int maxArea = 0;\n    int[] newHeights = Arrays.copyOf(heights, heights.length + 1);\n    for (int i = 0; i < newHeights.length; i++) {\n        while (!stack.isEmpty() && newHeights[i] < newHeights[stack.peek()]) {\n            int h = newHeights[stack.pop()];\n            int w = stack.isEmpty() ? i : i - stack.peek() - 1;\n            maxArea = Math.max(maxArea, h * w);\n        }\n        stack.push(i);\n    }\n    return maxArea;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "84. Find the kth largest element in an array.",
+    "solution_py": "import heapq\ndef findKthLargest(nums, k):\n    return heapq.nlargest(k, nums)[-1]",
+    "solution_java": "public int findKthLargest(int[] nums, int k) {\n    PriorityQueue<Integer> heap = new PriorityQueue<>();\n    for (int n : nums) {\n        heap.add(n);\n        if (heap.size() > k) heap.poll();\n    }\n    return heap.peek();\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "85. Convert a BST to a doubly linked list.",
+    "solution_py": "def treeToDoublyList(root):\n    if not root: return None\n    def dfs(node):\n        nonlocal last, head\n        if not node: return\n        dfs(node.left)\n        if last:\n            last.right = node\n            node.left = last\n        else:\n            head = node\n        last = node\n        dfs(node.right)\n    last, head = None, None\n    dfs(root)\n    head.left, last.right = last, head\n    return head",
+    "solution_java": "TreeNode head = null, prev = null;\npublic TreeNode treeToDoublyList(TreeNode root) {\n    if (root == null) return null;\n    dfs(root);\n    head.left = prev;\n    prev.right = head;\n    return head;\n}\nprivate void dfs(TreeNode node) {\n    if (node == null) return;\n    dfs(node.left);\n    if (prev != null) {\n        prev.right = node;\n        node.left = prev;\n    } else {\n        head = node;\n    }\n    prev = node;\n    dfs(node.right);\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "86. Implement a trie (prefix tree).",
+    "solution_py": "class TrieNode:\n    def __init__(self):\n        self.children = {}\n        self.isEnd = False\nclass Trie:\n    def __init__(self):\n        self.root = TrieNode()\n    def insert(self, word):\n        node = self.root\n        for c in word:\n            if c not in node.children:\n                node.children[c] = TrieNode()\n            node = node.children[c]\n        node.isEnd = True\n    def search(self, word):\n        node = self.root\n        for c in word:\n            if c not in node.children:\n                return False\n            node = node.children[c]\n        return node.isEnd",
+    "solution_java": "class TrieNode {\n    Map<Character, TrieNode> children = new HashMap<>();\n    boolean isEnd = false;\n}\nclass Trie {\n    TrieNode root = new TrieNode();\n    public void insert(String word) {\n        TrieNode node = root;\n        for (char c : word.toCharArray()) {\n            node = node.children.computeIfAbsent(c, k -> new TrieNode());\n        }\n        node.isEnd = true;\n    }\n    public boolean search(String word) {\n        TrieNode node = root;\n        for (char c : word.toCharArray()) {\n            node = node.children.get(c);\n            if (node == null) return false;\n        }\n        return node.isEnd;\n    }\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "87. Find all subsets (power set).",
+    "solution_py": "def subsets(nums):\n    res = [[]]\n    for num in nums:\n        res += [item + [num] for item in res]\n    return res",
+    "solution_java": "public List<List<Integer>> subsets(int[] nums) {\n    List<List<Integer>> res = new ArrayList<>();\n    res.add(new ArrayList<>());\n    for (int num : nums) {\n        List<List<Integer>> newSubsets = new ArrayList<>();\n        for (List<Integer> subset : res) {\n            List<Integer> newSubset = new ArrayList<>(subset);\n            newSubset.add(num);\n            newSubsets.add(newSubset);\n        }\n        res.addAll(newSubsets);\n    }\n    return res;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "88. Find the longest increasing subsequence.",
+    "solution_py": "import bisect\ndef lengthOfLIS(nums):\n    sub = []\n    for x in nums:\n        i = bisect.bisect_left(sub, x)\n        if i == len(sub): sub.append(x)\n        else: sub[i] = x\n    return len(sub)",
+    "solution_java": "public int lengthOfLIS(int[] nums) {\n    int[] dp = new int[nums.length];\n    int len = 0;\n    for (int num : nums) {\n        int i = Arrays.binarySearch(dp, 0, len, num);\n        if (i < 0) i = -(i + 1);\n        dp[i] = num;\n        if (i == len) len++;\n    }\n    return len;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "89. Implement a max heap.",
+    "solution_py": "import heapq\nclass MaxHeap:\n    def __init__(self):\n        self.heap = []\n    def push(self, val):\n        heapq.heappush(self.heap, -val)\n    def pop(self):\n        return -heapq.heappop(self.heap)\n    def peek(self):\n        return -self.heap[0]",
+    "solution_java": "PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());\nmaxHeap.add(10);\nint top = maxHeap.peek();\nint removed = maxHeap.poll();",
+    "category": "dsa"
+  },
+  {
+    "question": "90. Detect a duplicate number in an array (1 to n).",
+    "solution_py": "def findDuplicate(nums):\n    slow = nums[0]\n    fast = nums[0]\n    while True:\n        slow = nums[slow]\n        fast = nums[nums[fast]]\n        if slow == fast: break\n    slow = nums[0]\n    while slow != fast:\n        slow = nums[slow]\n        fast = nums[fast]\n    return slow",
+    "solution_java": "public int findDuplicate(int[] nums) {\n    int slow = nums[0], fast = nums[0];\n    do {\n        slow = nums[slow];\n        fast = nums[nums[fast]];\n    } while (slow != fast);\n    slow = nums[0];\n    while (slow != fast) {\n        slow = nums[slow];\n        fast = nums[fast];\n    }\n    return slow;\n}",
+    "category": "dsa"
+  },
+  
+  {
+    "question": "91. Find the Peak Element in an Array.",
+    "solution_py": "def find_peak(nums):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        mid = (left + right) // 2\n        if nums[mid] > nums[mid + 1]:\n            right = mid\n        else:\n            left = mid + 1\n    return left",
+    "solution_java": "int findPeakElement(int[] nums) {\n    int left = 0, right = nums.length - 1;\n    while (left < right) {\n        int mid = (left + right) / 2;\n        if (nums[mid] > nums[mid + 1])\n            right = mid;\n        else\n            left = mid + 1;\n    }\n    return left;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "92. Search in a 2D Matrix.",
+    "solution_py": "def search_matrix(matrix, target):\n    if not matrix or not matrix[0]: return False\n    rows, cols = len(matrix), len(matrix[0])\n    left, right = 0, rows * cols - 1\n    while left <= right:\n        mid = (left + right) // 2\n        val = matrix[mid // cols][mid % cols]\n        if val == target:\n            return True\n        elif val < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return False",
+    "solution_java": "boolean searchMatrix(int[][] matrix, int target) {\n    if (matrix.length == 0 || matrix[0].length == 0) return false;\n    int m = matrix.length, n = matrix[0].length;\n    int left = 0, right = m * n - 1;\n    while (left <= right) {\n        int mid = (left + right) / 2;\n        int midVal = matrix[mid / n][mid % n];\n        if (midVal == target) return true;\n        else if (midVal < target) left = mid + 1;\n        else right = mid - 1;\n    }\n    return false;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "93. Maximum Product Subarray.",
+    "solution_py": "def max_product(nums):\n    result = max(nums)\n    curr_min, curr_max = 1, 1\n    for n in nums:\n        if n == 0:\n            curr_min, curr_max = 1, 1\n            continue\n        temp = curr_max * n\n        curr_max = max(n * curr_max, n * curr_min, n)\n        curr_min = min(temp, n * curr_min, n)\n        result = max(result, curr_max)\n    return result",
+    "solution_java": "int maxProduct(int[] nums) {\n    int result = nums[0], currMax = 1, currMin = 1;\n    for (int n : nums) {\n        if (n == 0) {\n            currMax = currMin = 1;\n            result = Math.max(result, 0);\n            continue;\n        }\n        int temp = currMax * n;\n        currMax = Math.max(n, Math.max(currMax * n, currMin * n));\n        currMin = Math.min(n, Math.min(temp, currMin * n));\n        result = Math.max(result, currMax);\n    }\n    return result;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "94. Rotate Linked List.",
+    "solution_py": "def rotate_right(head, k):\n    if not head: return None\n    length, tail = 1, head\n    while tail.next:\n        tail = tail.next\n        length += 1\n    k %= length\n    if k == 0: return head\n    tail.next = head\n    steps = length - k\n    new_tail = head\n    for _ in range(steps - 1):\n        new_tail = new_tail.next\n    new_head = new_tail.next\n    new_tail.next = None\n    return new_head",
+    "solution_java": "ListNode rotateRight(ListNode head, int k) {\n    if (head == null || head.next == null) return head;\n    int len = 1;\n    ListNode tail = head;\n    while (tail.next != null) {\n        tail = tail.next;\n        len++;\n    }\n    k %= len;\n    if (k == 0) return head;\n    tail.next = head;\n    ListNode newTail = head;\n    for (int i = 0; i < len - k - 1; i++) newTail = newTail.next;\n    ListNode newHead = newTail.next;\n    newTail.next = null;\n    return newHead;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "95. Serialize and Deserialize Binary Tree.",
+    "solution_py": "class Codec:\n    def serialize(self, root):\n        vals = []\n        def dfs(node):\n            if not node:\n                vals.append(\"N\")\n                return\n            vals.append(str(node.val))\n            dfs(node.left)\n            dfs(node.right)\n        dfs(root)\n        return ','.join(vals)\n\n    def deserialize(self, data):\n        vals = iter(data.split(','))\n        def dfs():\n            val = next(vals)\n            if val == \"N\": return None\n            node = TreeNode(int(val))\n            node.left = dfs()\n            node.right = dfs()\n            return node\n        return dfs()",
+    "solution_java": "// Too large for inline, typically uses preorder traversal with 'null' placeholders.",
+    "category": "dsa"
+  },
+  {
+    "question": "96. Remove Duplicates from Sorted Array.",
+    "solution_py": "def remove_duplicates(nums):\n    if not nums: return 0\n    i = 0\n    for j in range(1, len(nums)):\n        if nums[j] != nums[i]:\n            i += 1\n            nums[i] = nums[j]\n    return i + 1",
+    "solution_java": "int removeDuplicates(int[] nums) {\n    if (nums.length == 0) return 0;\n    int i = 0;\n    for (int j = 1; j < nums.length; j++) {\n        if (nums[j] != nums[i]) {\n            i++;\n            nums[i] = nums[j];\n        }\n    }\n    return i + 1;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "97. Check if a Number is Power of Two.",
+    "solution_py": "def is_power_of_two(n):\n    return n > 0 and (n & (n - 1)) == 0",
+    "solution_java": "boolean isPowerOfTwo(int n) {\n    return n > 0 && (n & (n - 1)) == 0;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "98. Find the Majority Element.",
+    "solution_py": "def majority_element(nums):\n    count, candidate = 0, None\n    for num in nums:\n        if count == 0:\n            candidate = num\n        count += 1 if num == candidate else -1\n    return candidate",
+    "solution_java": "int majorityElement(int[] nums) {\n    int count = 0, candidate = 0;\n    for (int num : nums) {\n        if (count == 0) candidate = num;\n        count += (num == candidate) ? 1 : -1;\n    }\n    return candidate;\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "99. Implement pow(x, n).",
+    "solution_py": "def my_pow(x, n):\n    if n == 0: return 1\n    if n < 0: return 1 / my_pow(x, -n)\n    if n % 2:\n        return x * my_pow(x, n - 1)\n    return my_pow(x * x, n // 2)",
+    "solution_java": "double myPow(double x, int n) {\n    if (n == 0) return 1;\n    if (n < 0) return 1 / myPow(x, -n);\n    if (n % 2 == 1) return x * myPow(x, n - 1);\n    return myPow(x * x, n / 2);\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "100. Merge Intervals.",
+    "solution_py": "def merge(intervals):\n    intervals.sort(key=lambda x: x[0])\n    merged = []\n    for interval in intervals:\n        if not merged or merged[-1][1] < interval[0]:\n            merged.append(interval)\n        else:\n            merged[-1][1] = max(merged[-1][1], interval[1])\n    return merged",
+    "solution_java": "int[][] merge(int[][] intervals) {\n    Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n    List<int[]> merged = new ArrayList<>();\n    for (int[] interval : intervals) {\n        if (merged.isEmpty() || merged.get(merged.size() - 1)[1] < interval[0])\n            merged.add(interval);\n        else\n            merged.get(merged.size() - 1)[1] = Math.max(merged.get(merged.size() - 1)[1], interval[1]);\n    }\n    return merged.toArray(new int[merged.size()][]);\n}",
+    "category": "dsa"
+  },
+  {
+    "question": "1. A train 150 meters long is running at 60 km/h. How long will it take to cross a platform 100 meters long?",
+    "solution": "Total distance = 150 + 100 = 250 meters. Speed = 60 km/h = 16.67 m/s. Time = 250 / 16.67 ≈ 15 seconds.",
+    "category": "aptitude"
+  },
+  {
+    "question": "2. A man can row 30 km downstream in 3 hours and return in 6 hours. Find the speed of the boat in still water.",
+    "solution": "Downstream speed = 30/3 = 10 km/h, upstream = 30/6 = 5 km/h. Boat speed = (10 + 5)/2 = 7.5 km/h.",
+    "category": "aptitude"
+  },
+  {
+    "question": "3. A shopkeeper sells an article at a 10% profit. Had he sold it for ₹20 more, he would have gained 20%. Find the cost price.",
+    "solution": "Let CP = x. Then, 10% profit = x + 0.1x = 1.1x; 20% profit = x + 0.2x = 1.2x. Difference = ₹20. So, 1.2x - 1.1x = 0.1x = 20 => x = ₹200.",
+    "category": "aptitude"
+  },
+  {
+    "question": "4. If 5x + 3y = 35 and 3x + 2y = 22, find the value of x and y.",
+    "solution": "Solving the system: Multiply second equation by 3 => 9x + 6y = 66. Multiply first by 2 => 10x + 6y = 70. Subtracting: x = 4. Substitute to get y = 5.",
+    "category": "aptitude"
+  },
+  {
+    "question": "5. A man can complete a work in 15 days. If he works with his friend, they can finish it in 9 days. How long would his friend take alone?",
+    "solution": "Man’s 1-day work = 1/15; Combined = 1/9. Friend’s 1-day work = 1/9 - 1/15 = (5 - 3)/45 = 2/45 => 22.5 days.",
+    "category": "aptitude"
+  },
+  {
+    "question": "6. A sum becomes ₹2,640 in 2 years and ₹3,168 in 3 years under simple interest. What is the rate of interest per annum?",
+    "solution": "Difference = ₹3,168 - ₹2,640 = ₹528 (1 year interest). So, 2 years interest = ₹1,056. Principal = ₹2,640 - ₹1,056 = ₹1,584. Rate = (528 × 100)/(1,584 × 1) ≈ 33.33%.",
+    "category": "aptitude"
+  },
+  {
+    "question": "7. A can do a job in 12 days and B in 15 days. They start together but A leaves after 4 days. How long will B take to finish the rest?",
+    "solution": "A’s 4-day work = 4/12 = 1/3. Remaining = 2/3. B alone does 1/15 per day. Time = (2/3)/(1/15) = 10 days.",
+    "category": "aptitude"
+  },
+  {
+    "question": "8. Find the average of first 10 natural numbers.",
+    "solution": "Sum = n(n + 1)/2 = 10 × 11 / 2 = 55. Average = 55 / 10 = 5.5.",
+    "category": "aptitude"
+  },
+  {
+    "question": "9. Two numbers are in the ratio 3:4. If their LCM is 84, find the numbers.",
+    "solution": "Let numbers be 3x and 4x. LCM = 12x = 84 => x = 7. So, numbers are 21 and 28.",
+    "category": "aptitude"
+  },
+  {
+    "question": "10. A shopkeeper marks an item 40% above cost price and gives 10% discount. What is the profit percent?",
+    "solution": "Let CP = ₹100. MP = ₹140. SP = ₹140 - 10% = ₹126. Profit = ₹26 => Profit% = 26%.",
+    "category": "aptitude"
+  },
+  {
+    "question": "11. A tank fills in 6 hours by pipe A and empties in 9 hours by pipe B. Both are opened together. How long will it take to fill the tank?",
+    "solution": "Net 1-hour work = (1/6 - 1/9) = 1/18. So, tank fills in 18 hours.",
+    "category": "aptitude"
+  },
+  {
+    "question": "12. A person walks at 5 km/hr for 3 hours and cycles at 15 km/hr for 2 hours. Find average speed.",
+    "solution": "Distance = 5×3 + 15×2 = 15 + 30 = 45 km; Time = 5 hr. Avg speed = 45 / 5 = 9 km/hr.",
+    "category": "aptitude"
+  },
+  {
+    "question": "13. A bag contains 5 red and 7 green balls. What is the probability of picking a green ball?",
+    "solution": "Total = 12, green = 7. Probability = 7/12.",
+    "category": "aptitude"
+  },
+  {
+    "question": "14. The simple interest on a sum for 4 years at 10% p.a. is ₹800. Find the principal.",
+    "solution": "SI = (P × R × T) / 100 = (P × 10 × 4)/100 = 800 => P = ₹2,000.",
+    "category": "aptitude"
+  },
+  {
+    "question": "15. A man covers 150 km in 3 hours partly by train at 50 km/h and partly by car at 60 km/h. Find the distance he traveled by train.",
+    "solution": "Let distance by train = x. So, time by train = x/50, car = (150 - x)/60. Total time = 3. Solve: x/50 + (150 - x)/60 = 3 → x = 60 km.",
+    "category": "aptitude"
+  },
+  {
+    "question": "16. A number is divided in the ratio 2:3. The larger part is 60. What is the number?",
+    "solution": "Let parts be 2x and 3x. 3x = 60 => x = 20. Total = 5x = 100.",
+    "category": "aptitude"
+  },
+  {
+    "question": "17. A reduction of 20% in price allows a person to buy 5 kg more for ₹100. Find the original price per kg.",
+    "solution": "Let price = ₹x/kg. Then (100/x) - (100/0.8x) = 5 → Solve: x = ₹5.",
+    "category": "aptitude"
+  },
+  {
+    "question": "18. A batsman scores 120 runs in 15 innings with an average of 8. Find his average if highest and lowest scores (both 0) are removed.",
+    "solution": "Sum = 120, removing 0s = 13 innings. Avg = 120 / 13 ≈ 9.23.",
+    "category": "aptitude"
+  },
+  {
+    "question": "19. If the radius of a circle is increased by 20%, by what percent does the area increase?",
+    "solution": "Area ∝ r². New area = (1.2r)² = 1.44r². Increase = 44%.",
+    "category": "aptitude"
+  },
+  {
+    "question": "20. The ratio of the ages of A and B is 4:5. After 6 years, the ratio becomes 5:6. Find their present ages.",
+    "solution": "Let ages be 4x, 5x. After 6 yrs: (4x+6)/(5x+6) = 5/6 → Solve: x = 6. A = 24, B = 30.",
+    "category": "aptitude"
+  },
+  
+  {
+    "question": "21. A man can row 6 km/h in still water. If the river is running at 2 km/h, it takes him 1 hour to row to a place and back. How far is the place?",
+    "solution": "Let the distance be x km. Time downstream = x/(6+2), upstream = x/(6-2). Total time = 1 hr ⇒ x/8 + x/4 = 1 ⇒ (3x)/8 = 1 ⇒ x = 8/3 km.",
+    "category": "aptitude"
+  },
+  {
+    "question": "22. A sum of money triples itself in 6 years at simple interest. In how many years will it become five times?",
+    "solution": "If it triples in 6 years, SI = 2P in 6 yrs. So, SI for 1 year = (2P/6) = P/3. To become 5P, SI = 4P ⇒ 4P ÷ (P/3) = 12 years.",
+    "category": "aptitude"
+  },
+  {
+    "question": "23. A can do a job in 9 days, B in 18 days. How many days will they take together?",
+    "solution": "A's 1 day work = 1/9, B's = 1/18. Together = 1/9 + 1/18 = (2+1)/18 = 3/18 = 1/6. So, 6 days.",
+    "category": "aptitude"
+  },
+  {
+    "question": "24. What is the average of first 20 natural numbers?",
+    "solution": "Average = (Sum of first 20 natural numbers) / 20 = (20×21)/2 ÷ 20 = 10.5",
+    "category": "aptitude"
+  },
+  {
+    "question": "25. A bag contains 3 red, 5 blue, and 2 green balls. What is the probability of picking a blue ball?",
+    "solution": "Total balls = 10. Blue = 5. Probability = 5/10 = 1/2",
+    "category": "aptitude"
+  },
+  {
+    "question": "26. A boat takes 4 hours to go 40 km downstream and return. Speed of current is 2 km/h. Find the speed of boat in still water.",
+    "solution": "Let speed of boat = x. Then, 40/(x+2) + 40/(x-2) = 4. Solve to find x = 22 km/h.",
+    "category": "aptitude"
+  },
+  {
+    "question": "27. A shopkeeper sells an article for Rs. 315 at a loss of 10%. What was the cost price?",
+    "solution": "Selling Price = 90% of CP ⇒ CP = 315 × 100 / 90 = Rs. 350",
+    "category": "aptitude"
+  },
+  {
+    "question": "28. Find the compound interest on Rs. 8000 at 10% p.a. for 2 years.",
+    "solution": "CI = P(1 + R/100)^T - P = 8000×(1.1)^2 - 8000 = 8000×1.21 - 8000 = Rs. 1680",
+    "category": "aptitude"
+  },
+  {
+    "question": "29. A train crosses a pole in 15 seconds and a 100-meter platform in 25 seconds. Find the length of the train.",
+    "solution": "Let length of train = x. Speed = x/15 = (x+100)/25. Solving gives x = 150 meters.",
+    "category": "aptitude"
+  },
+  {
+    "question": "30. A person invests Rs. 1000 at 10% compound interest. What will be the amount after 3 years?",
+    "solution": "A = P(1 + r/100)^n = 1000×(1.1)^3 = Rs. 1331",
+    "category": "aptitude"
+  },
+  {
+    "question": "31. The HCF and LCM of two numbers are 12 and 360 respectively. If one number is 60, find the other.",
+    "solution": "HCF × LCM = product of numbers ⇒ 12×360 = 60×x ⇒ x = 72",
+    "category": "aptitude"
+  },
+  {
+    "question": "32. A car covers 300 km at 60 km/h and returns at 75 km/h. Find the average speed.",
+    "solution": "Average speed = 2xy / (x + y) = 2×60×75 / (60 + 75) = 9000 / 135 = 66.67 km/h",
+    "category": "aptitude"
+  },
+  {
+    "question": "33. A person spends 80% of his income. If his income is increased by 25% and expenditure by 20%, what is the percentage increase in savings?",
+    "solution": "Let income = 100, exp = 80 ⇒ savings = 20. New income = 125, new exp = 96 ⇒ new savings = 29. Increase = 9 ⇒ 45%",
+    "category": "aptitude"
+  },
+  {
+    "question": "34. A number when divided by 5 leaves remainder 4. What is the remainder when the square of the number is divided by 5?",
+    "solution": "Let number = 5k + 4. Square = 25k² + 40k + 16. Mod 5 = remainder of 16 = 1.",
+    "category": "aptitude"
+  },
+  {
+    "question": "35. The difference between simple interest and compound interest on Rs. 1000 for 2 years at 10% is?",
+    "solution": "SI = 200, CI = 210 ⇒ Difference = Rs. 10",
+    "category": "aptitude"
+  },
+  {
+    "question": "36. A sum of money becomes 4 times in 12 years at simple interest. What is the rate?",
+    "solution": "3P = SI ⇒ 3P = P×r×12/100 ⇒ r = 25%",
+    "category": "aptitude"
+  },
+  {
+    "question": "37. A train 180 meters long passes a man standing on a platform in 6 seconds. Find speed.",
+    "solution": "Speed = Distance/Time = 180/6 = 30 m/s = 108 km/h",
+    "category": "aptitude"
+  },
+  {
+    "question": "38. If x% of y is equal to y% of x, then?",
+    "solution": "x% of y = (x/100)y, y% of x = (y/100)x ⇒ both are equal ⇒ always true.",
+    "category": "aptitude"
+  },
+  {
+    "question": "39. A shopkeeper offers 10% discount on the marked price. What price must he mark to gain 8% after allowing the discount, if the cost price is Rs. 100?",
+    "solution": "Let MP = x. SP = 0.9x ⇒ 0.9x = 108 ⇒ x = 120",
+    "category": "aptitude"
+  },
+  {
+    "question": "40. A cistern can be filled by pipe A in 10 minutes and by B in 15 minutes. How long will it take to fill the tank if both are opened together?",
+    "solution": "A's work = 1/10, B's = 1/15 ⇒ Total = 1/10 + 1/15 = 1/6 ⇒ Time = 6 minutes.",
+    "category": "aptitude"
+  },
+  {
+  "question": "61. A shopkeeper buys 80 articles for Rs. 2400 and sells them for a profit of 16%. What is the selling price of one article?",
+  "solution": "Cost price of one article = 2400 / 80 = Rs. 30. Selling price = 30 + 16% of 30 = 30 + 4.8 = Rs. 34.8",
+  "category": "aptitude"
+},
+{
+  "question": "62. A can do a piece of work in 10 days and B in 15 days. They work together for 5 days. The remaining work is finished by C in 2 days. If they get Rs. 6000 for the work, what is C’s share?",
+  "solution": "A's 1 day work = 1/10, B's = 1/15. Combined work in 5 days = 5*(1/10 + 1/15) = 5*(5/30) = 5*(1/6) = 5/6. Remaining work = 1 - 5/6 = 1/6 done by C. So C's share = 1/6 * 6000 = Rs. 1000",
+  "category": "aptitude"
+},
+{
+  "question": "63. Find the compound interest on Rs. 2500 at 10% p.a. for 2 years.",
+  "solution": "CI = P(1 + R/100)^T - P = 2500(1 + 0.1)^2 - 2500 = 2500(1.21) - 2500 = Rs. 3025 - 2500 = Rs. 525",
+  "category": "aptitude"
+},
+{
+  "question": "64. A train travels 360 km at a uniform speed. If the speed had been 5 km/h more, it would have taken 48 minutes less. Find the speed of the train.",
+  "solution": "Let speed = x km/h. Time = 360/x, new time = 360/(x+5). 360/x - 360/(x+5) = 48/60. Solving gives x = 45 km/h.",
+  "category": "aptitude"
+},
+{
+  "question": "65. A can complete a work in 12 days and B in 16 days. In how many days will they complete it together?",
+  "solution": "A's 1 day work = 1/12, B's = 1/16. Together = 1/12 + 1/16 = (4 + 3)/48 = 7/48. Time = 48/7 = 6.86 days",
+  "category": "aptitude"
+},
+{
+  "question": "66. A sum of money becomes Rs. 1440 after 2 years and Rs. 1728 after 3 years on compound interest. Find the rate of interest.",
+  "solution": "CI for 1 year = 1728 - 1440 = Rs. 288. Rate = (288/1440)*100 = 20%",
+  "category": "aptitude"
+},
+{
+  "question": "67. A man sold an article at a loss of 10%. Had he sold it for Rs. 40 more, he would have gained 5%. Find the cost price.",
+  "solution": "Let CP = x. Then, x - 10% of x + 40 = x + 5% of x. Solving: 0.9x + 40 = 1.05x → 0.15x = 40 → x = Rs. 266.67",
+  "category": "aptitude"
+},
+{
+  "question": "68. A can finish a work in 18 days, B in 24 days. They worked together for 4 days, then B left. In how many more days will A finish the work?",
+  "solution": "Work in 4 days = 4*(1/18 + 1/24) = 4*(7/72) = 28/72. Remaining = 44/72. A alone: 44/72 ÷ 1/18 = 11 days",
+  "category": "aptitude"
+},
+{
+  "question": "69. What is the probability of drawing a queen from a standard deck of 52 cards?",
+  "solution": "There are 4 queens in 52 cards. Probability = 4/52 = 1/13",
+  "category": "aptitude"
+},
+{
+  "question": "70. A batsman has an average of 50 runs in 40 innings. What is his total score?",
+  "solution": "Total score = average × number of innings = 50 × 40 = 2000 runs",
+  "category": "aptitude"
+},
+{
+  "question": "71. A certain number of men can finish a piece of work in 20 days. If there were 10 more men, the work could be done in 12 days. Find the original number of men.",
+  "solution": "Let men = x. Then, x×20 = (x + 10)×12 → 20x = 12x + 120 → 8x = 120 → x = 15",
+  "category": "aptitude"
+},
+{
+  "question": "72. If the average of 5 consecutive odd numbers is 27, find the middle number.",
+  "solution": "Let numbers be x-4, x-2, x, x+2, x+4. Average = x. So x = 27 → middle number is 27",
+  "category": "aptitude"
+},
+{
+  "question": "73. A pipe can fill a tank in 6 hours. Another can empty it in 8 hours. If both are opened, how long will it take to fill the tank?",
+  "solution": "Net fill rate = 1/6 - 1/8 = (4 - 3)/24 = 1/24. So tank will be filled in 24 hours",
+  "category": "aptitude"
+},
+{
+  "question": "74. A car travels from A to B at 60 km/h and returns at 40 km/h. What is the average speed for the whole journey?",
+  "solution": "Average speed = (2xy)/(x+y) = (2×60×40)/(60+40) = 4800/100 = 48 km/h",
+  "category": "aptitude"
+},
+{
+  "question": "75. A person spends 80% of his income. If his income increases by 25% and his expenditure increases by 20%, find the percentage increase in his savings.",
+  "solution": "Initial income = 100, expenditure = 80, savings = 20. New income = 125, expenditure = 96, savings = 29. % Increase = (9/20)*100 = 45%",
+  "category": "aptitude"
+},
+{
+  "question": "76. A boat can travel 30 km downstream in 2 hours and the same distance upstream in 3 hours. Find the speed of the boat and the current.",
+  "solution": "Downstream speed = 15, upstream = 10 → Boat speed = (15+10)/2 = 12.5 km/h, current = (15-10)/2 = 2.5 km/h",
+  "category": "aptitude"
+},
+{
+  "question": "77. A number is such that when 15 is subtracted from it, it is divisible by 6, 9, 12. What is the smallest such number?",
+  "solution": "LCM of 6, 9, 12 = 36. So number = 36 + 15 = 51",
+  "category": "aptitude"
+},
+{
+  "question": "78. What will be the angle between the hour and minute hand at 3:40?",
+  "solution": "Hour hand = 3×30 + (40×0.5) = 110°. Minute hand = 40×6 = 240°. Angle = |240 - 110| = 130°",
+  "category": "aptitude"
+},
+{
+  "question": "79. A train passes a man in 12 seconds and a 240 m long platform in 24 seconds. Find the length of the train.",
+  "solution": "Let length = L. Speed = L/12 = (L + 240)/24 → 2L = L + 240 → L = 240 m",
+  "category": "aptitude"
+},
+{
+  "question": "80. The average of three numbers is 50. If two of the numbers are 45 and 55, what is the third number?",
+  "solution": "Total = 3×50 = 150. Third number = 150 - 45 - 55 = 50",
+  "category": "aptitude"
+},
+{
+  "question": "81. What is the average of the first 25 natural numbers?",
+  "solution": "The sum of first n natural numbers = n(n+1)/2 = 25×26/2 = 325. Average = 325/25 = 13.",
+  "category": "aptitude"
+},
+{
+  "question": "82. A car is sold for ₹60,000 at a loss of 20%. What is the cost price?",
+  "solution": "Selling Price = ₹60,000, Loss = 20%. Cost Price = SP × 100 / (100 - Loss) = 60000 × 100 / 80 = ₹75,000.",
+  "category": "aptitude"
+},
+{
+  "question": "83. A man covers a certain distance at 40 km/h and returns at 60 km/h. Find the average speed.",
+  "solution": "Average speed = 2ab / (a + b) = 2×40×60 / (40+60) = 4800 / 100 = 48 km/h.",
+  "category": "aptitude"
+},
+{
+  "question": "84. A man spends 80% of his income. If he earns ₹25,000, what is his savings?",
+  "solution": "Expenditure = 80% of ₹25,000 = ₹20,000. Savings = ₹25,000 - ₹20,000 = ₹5,000.",
+  "category": "aptitude"
+},
+{
+  "question": "85. A shopkeeper sells two items for ₹1,000 each. On one he gains 25% and on the other he loses 25%. Find the overall gain or loss.",
+  "solution": "Overall loss = (25×25)/100 = 6.25%. Loss = 6.25% of ₹2000 = ₹125.",
+  "category": "aptitude"
+},
+{
+  "question": "86. A train takes 2 hours to cover 120 km. What is its speed?",
+  "solution": "Speed = Distance / Time = 120 / 2 = 60 km/h.",
+  "category": "aptitude"
+},
+{
+  "question": "87. A box contains 3 red balls, 5 green balls and 2 blue balls. What is the probability of picking a green ball?",
+  "solution": "Total balls = 10, Green = 5. Probability = 5/10 = 1/2.",
+  "category": "aptitude"
+},
+{
+  "question": "88. In how many ways can the letters of the word ‘MATH’ be arranged?",
+  "solution": "Number of arrangements = 4! = 24 ways.",
+  "category": "aptitude"
+},
+{
+  "question": "89. What will be the compound interest on ₹5,000 for 2 years at 10% p.a.?",
+  "solution": "CI = P(1 + r/100)^t - P = 5000(1.1)^2 - 5000 = 6050 - 5000 = ₹1050.",
+  "category": "aptitude"
+},
+{
+  "question": "90. A sum of money becomes ₹2,200 in 2 years and ₹2,420 in 3 years at simple interest. Find the principal.",
+  "solution": "SI for 1 year = 2420 - 2200 = ₹220. So for 2 years = ₹440. Principal = 2200 - 440 = ₹1,760.",
+  "category": "aptitude"
+},
+{
+  "question": "91. Two pipes can fill a tank in 20 and 30 minutes respectively. How long will they take to fill the tank together?",
+  "solution": "LCM of 20 and 30 = 60. (3+2) = 5 units/min. Time = 60/5 = 12 minutes.",
+  "category": "aptitude"
+},
+{
+  "question": "92. A can do a work in 10 days, B in 15 days. How long will they take together?",
+  "solution": "1/10 + 1/15 = (3+2)/30 = 5/30 = 1/6. Time = 6 days.",
+  "category": "aptitude"
+},
+{
+  "question": "93. The average age of 30 students is 20 years. If teacher's age is included, the average becomes 21. Find the teacher's age.",
+  "solution": "Total age of students = 30×20 = 600. Total with teacher = 31×21 = 651. Teacher's age = 651 - 600 = 51 years.",
+  "category": "aptitude"
+},
+{
+  "question": "94. A boat takes 3 hours to go 30 km downstream and 5 hours upstream. Find the speed of the boat in still water.",
+  "solution": "Downstream = 10 km/h, Upstream = 6 km/h. Speed in still water = (10+6)/2 = 8 km/h.",
+  "category": "aptitude"
+},
+{
+  "question": "95. A man invests ₹10,000 at 5% simple interest. What will be the interest after 4 years?",
+  "solution": "SI = (P×R×T)/100 = (10000×5×4)/100 = ₹2,000.",
+  "category": "aptitude"
+},
+{
+  "question": "96. If 3A = 2B and 4B = 5C, find the ratio A:B:C.",
+  "solution": "3A = 2B ⇒ A:B = 2:3, 4B = 5C ⇒ B:C = 5:4 ⇒ A:B:C = 10:15:12.",
+  "category": "aptitude"
+},
+{
+  "question": "97. If the perimeter of a rectangle is 60 m and its length is 20 m, find its breadth.",
+  "solution": "Perimeter = 2(l + b) ⇒ 60 = 2(20 + b) ⇒ b = 10 m.",
+  "category": "aptitude"
+},
+{
+  "question": "98. A man borrows ₹2,500 at 12% p.a. compound interest for 2 years. Find the total amount.",
+  "solution": "Amount = P(1 + r/100)^n = 2500(1.12)^2 = ₹3,136.",
+  "category": "aptitude"
+},
+{
+  "question": "99. If the selling price of an article is double the cost price, find the profit percentage.",
+  "solution": "Profit = SP - CP = CP, Profit % = CP/CP × 100 = 100%.",
+  "category": "aptitude"
+},
+{
+  "question": "100. What is the least number which when divided by 12, 18, and 24 leaves a remainder of 5 in each case?",
+  "solution": "LCM of 12, 18, 24 = 72. Least number = 72 + 5 = 77.",
+  "category": "aptitude"
+},
+  {
+    "question": "1. Tell me about yourself.",
+    "solution": "Start with your name, education, key skills, and briefly mention relevant projects or internships. End with why you're excited about the current opportunity.",
+    "category": "interview"
+  },
+  {
+    "question": "2. What are your strengths?",
+    "solution": "Mention 2–3 strengths like problem-solving, adaptability, communication, or teamwork with short examples.",
+    "category": "interview"
+  },
+  {
+    "question": "3. What are your weaknesses?",
+    "solution": "Pick a real but non-critical weakness. Show awareness and what you're doing to improve it (e.g., public speaking, time management).",
+    "category": "interview"
+  },
+  {
+    "question": "4. Why do you want to work at our company?",
+    "solution": "Research the company’s mission, culture, or tech stack. Connect it to your career goals and skills.",
+    "category": "interview"
+  },
+  {
+    "question": "5. Where do you see yourself in 5 years?",
+    "solution": "Show ambition but stay relevant. Mention technical growth, leadership interest, or mastery in a field.",
+    "category": "interview"
+  },
+  {
+    "question": "6. Describe a challenging situation and how you handled it.",
+    "solution": "Use the STAR method: Situation, Task, Action, Result. Focus on how you solved the issue and what you learned.",
+    "category": "interview"
+  },
+  {
+    "question": "7. What is your most significant achievement?",
+    "solution": "Choose a project, internship, or competition. Briefly explain the challenge, your role, and the positive outcome.",
+    "category": "interview"
+  },
+  {
+    "question": "8. Are you comfortable working in a team?",
+    "solution": "Yes. Provide a short example of a group project or event you successfully collaborated on.",
+    "category": "interview"
+  },
+  {
+    "question": "9. Why should we hire you?",
+    "solution": "Sum up your strengths, relevant experience, and motivation. Show how you match the job description.",
+    "category": "interview"
+  },
+  {
+    "question": "10. How do you handle failure?",
+    "solution": "Explain a real failure, your reaction, what you learned, and how it improved your future performance.",
+    "category": "interview"
+  },
+  {
+    "question": "11. What are your salary expectations?",
+    "solution": "Research industry averages. Say you're open to discussing a fair offer based on the role and your skills.",
+    "category": "interview"
+  },
+  {
+    "question": "12. Do you have any questions for us?",
+    "solution": "Ask thoughtful questions about the team, growth opportunities, or company culture.",
+    "category": "interview"
+  },
+  {
+    "question": "13. What is your understanding of our business?",
+    "solution": "Briefly describe the company’s product/services and audience. Mention recent news or achievements if possible.",
+    "category": "interview"
+  },
+  {
+    "question": "14. Tell me about a time you showed leadership.",
+    "solution": "Mention when you took initiative or led a team. Focus on planning, communication, and results.",
+    "category": "interview"
+  },
+  {
+    "question": "15. How do you prioritize your tasks?",
+    "solution": "Mention using to-do lists, deadlines, and urgency/importance matrices. Provide a real example.",
+    "category": "interview"
+  },
+  {
+    "question": "16. What motivates you?",
+    "solution": "Mention learning new things, solving problems, achieving goals, or working with smart people.",
+    "category": "interview"
+  },
+  {
+    "question": "17. How do you handle criticism?",
+    "solution": "Say you welcome constructive feedback, learn from it, and use it to improve your work.",
+    "category": "interview"
+  },
+  {
+    "question": "18. What technologies are you most comfortable with?",
+    "solution": "List the technologies you’ve used in projects or internships and which you prefer or want to learn more about.",
+    "category": "interview"
+  },
+  {
+    "question": "19. What do you know about our tech stack?",
+    "solution": "Research and mention specific languages, frameworks, or tools the company uses. Relate them to your experience if possible.",
+    "category": "interview"
+  },
+  {
+    "question": "20. How do you keep yourself updated with new technologies?",
+    "solution": "Mention blogs, YouTube, LinkedIn, courses (like Coursera/Udemy), or contributing to open-source projects.",
+    "category": "interview"
+  },
+  
+  {
+    "question": "21. Describe a time when you had a conflict at work and how you resolved it.",
+    "solution": "During a group project, a teammate disagreed with the proposed approach. I initiated a meeting to understand their perspective, and we collaborated to combine the best ideas from both sides. This not only resolved the conflict but also improved the final outcome.",
+    "category": "interview"
+  },
+  {
+    "question": "22. How do you prioritize tasks when working under tight deadlines?",
+    "solution": "I assess all tasks, determine which are most critical or time-sensitive, and create a timeline. I break larger tasks into smaller chunks and focus on completing them one at a time, adjusting as necessary if priorities shift.",
+    "category": "interview"
+  },
+  {
+    "question": "23. Tell me about a time you failed and what you learned.",
+    "solution": "I once underestimated the time needed for a feature implementation, leading to a delay. I learned to better estimate timelines, communicate early, and always include buffer time in schedules.",
+    "category": "interview"
+  },
+  {
+    "question": "24. How do you handle receiving negative feedback?",
+    "solution": "I view feedback as an opportunity to grow. I listen without getting defensive, ask clarifying questions, and create an action plan to improve.",
+    "category": "interview"
+  },
+  {
+    "question": "25. Describe a project where you demonstrated leadership skills.",
+    "solution": "I led a 4-member team for a campus hackathon. I delegated tasks based on strengths, kept everyone motivated, and ensured we met all deadlines. We ended up winning 2nd place.",
+    "category": "interview"
+  },
+  {
+    "question": "26. How do you ensure clear communication in a remote work environment?",
+    "solution": "I over-communicate to avoid ambiguity, use tools like Slack, email, and Zoom, and summarize decisions in writing. I also schedule regular check-ins to keep everyone aligned.",
+    "category": "interview"
+  },
+  {
+    "question": "27. What motivates you to do your best at work?",
+    "solution": "I’m motivated by learning opportunities, solving challenging problems, and the sense of achievement when I see my contributions make an impact.",
+    "category": "interview"
+  },
+  {
+    "question": "28. Describe a time you went above and beyond your job responsibilities.",
+    "solution": "During a campus event, I took initiative to manage logistics when the original lead dropped out. My quick action helped the event proceed smoothly and I received appreciation from the organizers.",
+    "category": "interview"
+  },
+  {
+    "question": "29. How do you keep up with new trends in your field?",
+    "solution": "I follow tech blogs, attend webinars, take online courses, and contribute to open-source projects to stay updated and sharpen my skills.",
+    "category": "interview"
+  },
+  {
+    "question": "30. Why should we hire you?",
+    "solution": "I bring a strong foundation in programming, a proactive mindset, and a genuine enthusiasm for solving real-world problems. I'm a quick learner and team player ready to contribute from day one.",
+    "category": "interview"
+  },
+  {
+    "question": "31. How do you manage stress during challenging situations?",
+    "solution": "I stay calm by breaking the problem into manageable steps, focusing on what I can control, and occasionally taking short breaks to reset my focus.",
+    "category": "interview"
+  },
+  {
+    "question": "32. What are your career goals for the next 5 years?",
+    "solution": "I aim to become a full-stack developer contributing to impactful projects, and eventually take on technical leadership roles to mentor others.",
+    "category": "interview"
+  },
+  {
+    "question": "33. Describe your ideal work environment.",
+    "solution": "A collaborative team culture where learning is encouraged, feedback is constructive, and innovation is supported.",
+    "category": "interview"
+  },
+  {
+    "question": "34. Tell me about a time you had to quickly learn something new.",
+    "solution": "For a college project, I had to use React.js without prior experience. I spent a weekend learning the basics through documentation and tutorials and managed to deliver the frontend on time.",
+    "category": "interview"
+  },
+  {
+    "question": "35. How do you handle ambiguity at work?",
+    "solution": "I ask clarifying questions, break the problem into parts, and make progress with available information while keeping stakeholders updated.",
+    "category": "interview"
+  },
+  {
+    "question": "36. What does teamwork mean to you?",
+    "solution": "Teamwork means collaborating effectively, valuing others’ contributions, and supporting the common goal with a positive attitude.",
+    "category": "interview"
+  },
+  {
+    "question": "37. Tell me about a time you solved a difficult problem.",
+    "solution": "In my internship, we faced a critical bug. I traced the issue through logs, isolated the root cause, and proposed a patch. It was accepted and deployed successfully.",
+    "category": "interview"
+  },
+  {
+    "question": "38. How do you prepare for a technical presentation?",
+    "solution": "I research thoroughly, prepare slides with key points and visuals, rehearse multiple times, and anticipate potential questions from the audience.",
+    "category": "interview"
+  },
+  {
+    "question": "39. What are your strengths and weaknesses?",
+    "solution": "Strengths: Problem-solving, adaptability, and persistence. Weakness: I sometimes over-analyze, but I’m learning to trust my judgment more.",
+    "category": "interview"
+  },
+  {
+    "question": "40. Describe a situation where you helped a teammate.",
+    "solution": "When a teammate struggled with SQL, I offered to pair program. We worked through queries together, and they gained confidence and improved quickly.",
+    "category": "interview"
+  },
+  
+  {
+    "question": "41. How do you prioritize tasks when handling multiple projects?",
+    "solution": "I assess the urgency and impact of each task, set clear deadlines, and use tools like Trello or a priority matrix. Communication with stakeholders helps me adjust priorities dynamically."
+  },
+  {
+    "question": "42. Describe a situation where you had to work with a difficult team member.",
+    "solution": "I maintained professionalism, focused on open communication, and sought to understand their perspective. Eventually, we aligned on shared goals and improved collaboration."
+  },
+  {
+    "question": "43. How do you stay current with industry trends?",
+    "solution": "I regularly read tech blogs, subscribe to newsletters like Hacker News, and take courses on platforms like Coursera or Udemy. I also attend meetups and webinars."
+  },
+  {
+    "question": "44. What would you do if you disagreed with your manager’s decision?",
+    "solution": "I would respectfully express my concerns with supporting evidence and be open to understanding their reasoning. Ultimately, I would align with the final decision for the team's success."
+  },
+  {
+    "question": "45. Tell me about a time you missed a deadline.",
+    "solution": "During a college project, I underestimated the testing time. I communicated early with my professor, took accountability, and worked overtime to deliver a quality submission shortly after."
+  },
+  {
+    "question": "46. How do you handle stress in high-pressure situations?",
+    "solution": "I break down tasks into smaller parts, focus on one step at a time, and prioritize effectively. I also make time for short breaks to stay focused and calm."
+  },
+  {
+    "question": "47. What motivates you to perform at your best?",
+    "solution": "I'm driven by the opportunity to solve meaningful problems, continuous learning, and the impact my work can have on users and business outcomes."
+  },
+  {
+    "question": "48. How would your friends describe you?",
+    "solution": "They’d describe me as dependable, optimistic, and someone who’s always curious and eager to learn something new."
+  },
+  {
+    "question": "49. Why do you want to work at our company?",
+    "solution": "I admire your company’s mission and innovation, and I see alignment between your values and my skills. I’m excited about contributing to meaningful projects here."
+  },
+  {
+    "question": "50. Give an example of a time you had to learn a new skill quickly.",
+    "solution": "For a hackathon, I had to learn Flask in 2 days. I followed crash courses, built a mini project for practice, and successfully delivered a working app with my team."
+  },
+  {
+    "question": "51. How do you ensure your work is error-free?",
+    "solution": "I follow a disciplined approach: plan thoroughly, write clean code, use linters, write unit tests, and always review my work or have a peer review it."
+  },
+  {
+    "question": "52. Have you ever failed at something? What did you learn?",
+    "solution": "Yes, I failed a coding interview once. It taught me to better prepare through mock interviews and improve my problem-solving under time constraints."
+  },
+  {
+    "question": "53. How do you adapt to changes in project requirements?",
+    "solution": "I stay flexible by maintaining modular code, updating documentation, and regularly syncing with stakeholders to understand updated priorities."
+  },
+  {
+    "question": "54. Tell me about a time when you had to explain a complex topic to someone without a technical background.",
+    "solution": "While interning, I explained our API design to marketing colleagues using analogies and visuals to ensure clarity without diving into code-level details."
+  },
+  {
+    "question": "55. What do you do if you don’t know how to complete a task?",
+    "solution": "I research using reliable sources, consult documentation, ask experienced peers, and break the problem into smaller parts I can approach more easily."
+  },
+  {
+    "question": "56. What are your long-term career goals?",
+    "solution": "I aim to grow into a full-stack engineer with leadership responsibilities, contributing to impactful products and mentoring junior developers along the way."
+  },
+  {
+    "question": "57. How do you manage your time during exams and project deadlines?",
+    "solution": "I use a planner to block time, prioritize tasks based on urgency, and set daily goals. I also avoid multitasking to stay efficient."
+  },
+  {
+    "question": "58. Describe a time when you took initiative.",
+    "solution": "I noticed a repetitive task during my internship and automated it using a script, which saved hours of manual work for the team weekly."
+  },
+  {
+    "question": "59. What is your approach to giving and receiving feedback?",
+    "solution": "I focus on constructive, actionable input and maintain a respectful tone. When receiving feedback, I stay open-minded and treat it as a learning opportunity."
+  },
+  {
+    "question": "60. How do you ensure good communication in a remote or hybrid environment?",
+    "solution": "I maintain clear documentation, proactively update my team on progress, and use tools like Slack or Zoom to ensure consistent and transparent communication."
+  },
+  
+  {
+    "question": "61. What qualities do you think make a great team member?",
+    "solution": "Strong communication, accountability, collaboration, willingness to help others, and openness to feedback all make someone a valuable team member.",
+    "category": "interview"
+  },
+  {
+    "question": "62. Describe a time when you had to meet a tight deadline.",
+    "solution": "During finals week, I also had a project due. I created a detailed schedule, eliminated distractions, and worked in focused sprints to meet the deadline without compromising quality.",
+    "category": "interview"
+  },
+  {
+    "question": "63. How do you handle multiple responsibilities at once?",
+    "solution": "I prioritize using a task list, time-block my calendar, and break large tasks into smaller ones. I also communicate early if I need support or deadline adjustments.",
+    "category": "interview"
+  },
+  {
+    "question": "64. How do you handle constructive criticism?",
+    "solution": "I listen carefully, thank the person, and reflect on the feedback. I use it to identify areas for improvement and adjust my approach accordingly.",
+    "category": "interview"
+  },
+  {
+    "question": "65. What are you passionate about?",
+    "solution": "I’m passionate about learning new technologies and solving real-world problems through coding. I also enjoy mentoring and sharing knowledge with peers.",
+    "category": "interview"
+  },
+  {
+    "question": "66. Tell me about a time you took a risk professionally.",
+    "solution": "In a group project, I suggested using a new tech stack. Though initially hesitant, the team agreed. It was challenging but ultimately led to a more efficient solution.",
+    "category": "interview"
+  },
+  {
+    "question": "67. What do you think is more important: delivering on time or delivering perfectly?",
+    "solution": "It depends on context, but usually delivering a working solution on time is more critical. Improvements can follow, but reliability and consistency build trust.",
+    "category": "interview"
+  },
+  {
+    "question": "68. What’s your approach to learning a new programming language or framework?",
+    "solution": "I start with official docs and tutorials, then apply what I learn in small projects. I reinforce it by solving problems or contributing to real tasks.",
+    "category": "interview"
+  },
+  {
+    "question": "69. How would you deal with a manager who constantly micromanages?",
+    "solution": "I’d maintain open communication, proactively update them on progress, and build trust through consistent, quality delivery. Over time, this can reduce micromanagement.",
+    "category": "interview"
+  },
+  {
+    "question": "70. How do you keep yourself organized?",
+    "solution": "I use digital tools like Trello or Notion for task tracking and calendar apps to manage my time. I review my plan daily and adjust as needed.",
+    "category": "interview"
+  },
+  {
+    "question": "71. Describe your ideal manager.",
+    "solution": "Someone who communicates clearly, trusts their team, provides constructive feedback, and supports professional growth.",
+    "category": "interview"
+  },
+  {
+    "question": "72. Tell me about a time you had to explain a technical topic to non-technical stakeholders.",
+    "solution": "I explained the results of a data analysis project using simple visuals and analogies. This helped the marketing team make informed campaign decisions.",
+    "category": "interview"
+  },
+  {
+    "question": "73. What’s the biggest challenge you’ve faced so far?",
+    "solution": "Balancing multiple final exams with a part-time internship. I built a structured plan, stuck to it, and successfully delivered on both fronts.",
+    "category": "interview"
+  },
+  {
+    "question": "74. Have you ever worked with someone difficult? How did you handle it?",
+    "solution": "Yes. I focused on professionalism, clarified roles, and maintained open communication. Eventually, our understanding improved and the project succeeded.",
+    "category": "interview"
+  },
+  {
+    "question": "75. What would you do if you were asked to do a task you don’t know how to complete?",
+    "solution": "I’d break it down, research independently, and ask for guidance if needed. I see it as a chance to learn.",
+    "category": "interview"
+  },
+  {
+    "question": "76. How do you ensure effective communication in team projects?",
+    "solution": "I initiate regular check-ins, summarize updates in writing, and use collaboration tools to ensure clarity and alignment.",
+    "category": "interview"
+  },
+  {
+    "question": "77. What do you value most in a workplace?",
+    "solution": "A culture of respect, continuous learning, clear communication, and support for innovation and experimentation.",
+    "category": "interview"
+  },
+  {
+    "question": "78. How do you deal with repetitive or boring tasks?",
+    "solution": "I automate them if possible, break them into smaller steps, and remind myself of their importance to the bigger picture.",
+    "category": "interview"
+  },
+  {
+    "question": "79. Tell me about a time you received unexpected feedback.",
+    "solution": "A mentor once pointed out that I needed to ask for help earlier. I worked on that by checking in more often and avoiding delays.",
+    "category": "interview"
+  },
+  {
+    "question": "80. How would you respond if your project failed?",
+    "solution": "I’d analyze what went wrong, discuss it with my team, and document lessons learned to avoid future issues. Failures are part of growth.",
+    "category": "interview"
+  },
+  
+  {
+    "question": "81. How do you measure your success?",
+    "solution": "I measure success by the value I add, the skills I develop, and the positive impact of my work on users, teams, and business goals.",
+    "category": "interview"
+  },
+  {
+    "question": "82. What do you do when you’re stuck on a problem?",
+    "solution": "I take a step back, review documentation or resources, try debugging systematically, and if needed, seek help after attempting all options.",
+    "category": "interview"
+  },
+  {
+    "question": "83. What does professionalism mean to you?",
+    "solution": "Being respectful, reliable, honest, and accountable in all work interactions and delivering high-quality results consistently.",
+    "category": "interview"
+  },
+  {
+    "question": "84. How would you react if you made a mistake in a live environment?",
+    "solution": "I’d immediately report it, help fix it, and identify the root cause. I’d also suggest safeguards to prevent similar mistakes.",
+    "category": "interview"
+  },
+  {
+    "question": "85. What makes you unique?",
+    "solution": "My combination of strong technical foundation, eagerness to learn, and ability to communicate effectively across technical and non-technical teams.",
+    "category": "interview"
+  },
+  {
+    "question": "86. How do you manage your learning and upskilling?",
+    "solution": "I dedicate regular time to courses, side projects, and reading. I set quarterly learning goals to stay focused and consistent.",
+    "category": "interview"
+  },
+  {
+    "question": "87. Have you ever made a suggestion that improved your team or project?",
+    "solution": "Yes, I proposed automating part of our testing workflow, which reduced regression bugs and saved hours every sprint.",
+    "category": "interview"
+  },
+  {
+    "question": "88. How do you balance speed vs. quality when coding?",
+    "solution": "I prioritize a clean, working solution first. I then refactor and test for quality. For critical tasks, quality always comes first.",
+    "category": "interview"
+  },
+  {
+    "question": "89. What kind of work excites you the most?",
+    "solution": "Challenging problems that push me to learn new things, especially those involving clean UI, efficient backend logic, or real-world impact.",
+    "category": "interview"
+  },
+  {
+    "question": "90. What’s your experience working with diverse teams?",
+    "solution": "I’ve worked with teams from different academic and cultural backgrounds, and I’ve learned that empathy and open communication build stronger collaboration.",
+    "category": "interview"
+  },
+  {
+    "question": "91. If you could change one thing about yourself, what would it be?",
+    "solution": "I’d like to be more comfortable with public speaking. I’m actively improving it through workshops and small presentations.",
+    "category": "interview"
+  },
+  {
+    "question": "92. Describe your decision-making process.",
+    "solution": "I identify the goal, gather facts, evaluate options, and consider trade-offs. I also ask for input when needed before acting.",
+    "category": "interview"
+  },
+  {
+    "question": "93. What kind of leadership style do you prefer working under?",
+    "solution": "A supportive and transparent leader who trusts the team, provides feedback, and encourages innovation and autonomy.",
+    "category": "interview"
+  },
+  {
+    "question": "94. What are your views on remote work?",
+    "solution": "I find it productive with the right tools and communication. I value flexibility but also enjoy the occasional in-person collaboration.",
+    "category": "interview"
+  },
+  {
+    "question": "95. How do you handle an overwhelming workload?",
+    "solution": "I break tasks into manageable chunks, prioritize based on impact and deadlines, and communicate early if timelines need to shift.",
+    "category": "interview"
+  },
+  {
+    "question": "96. Have you ever mentored someone?",
+    "solution": "Yes, I mentored a junior during a college club project. I helped them learn Git and guided them through their first code contribution.",
+    "category": "interview"
+  },
+  {
+    "question": "97. How do you give feedback to peers?",
+    "solution": "I keep it constructive, specific, and focused on behavior and outcomes, not personality. I balance positives with areas for improvement.",
+    "category": "interview"
+  },
+  {
+    "question": "98. Tell me about a time you exceeded expectations.",
+    "solution": "In an internship, I completed my assigned tasks early and proactively optimized a legacy script, which reduced load time by 30%.",
+    "category": "interview"
+  },
+  {
+    "question": "99. What’s your favorite project you’ve worked on and why?",
+    "solution": "A personal finance tracker app using React and Firebase. It combined frontend, backend, and real-time updates and taught me full-stack integration.",
+    "category": "interview"
+  },
+  {
+    "question": "100. Do you prefer working independently or in a team?",
+    "solution": "I enjoy both. I’m self-driven when working independently and equally comfortable collaborating within a team to solve complex problems.",
+    "category": "interview"
+  },  
+  {
+    "question": "1. Keep your resume to one page.",
+    "solution": "For freshers or early-career professionals, one page is enough to highlight key achievements and skills. Recruiters often skim resumes quickly.",
+    "category": "resume"
+  },
+  {
+    "question": "2. Use a clean and professional format.",
+    "solution": "Avoid flashy designs or unnecessary graphics. Stick to a consistent font, proper spacing, and clean alignment.",
+    "category": "resume"
+  },
+  {
+    "question": "3. Customize your resume for each job.",
+    "solution": "Tailor your resume by aligning keywords and relevant skills to the specific job description. It increases your chances of passing through applicant tracking systems.",
+    "category": "resume"
+  },
+  {
+    "question": "4. Start with a strong summary statement.",
+    "solution": "Begin with 2–3 lines summarizing your skills, experience, and what you bring to the role. It grabs attention quickly.",
+    "category": "resume"
+  },
+  {
+    "question": "5. List technical and soft skills separately.",
+    "solution": "Separate hard skills like programming languages from soft skills like communication and leadership to improve clarity.",
+    "category": "resume"
+  },
+  {
+    "question": "6. Quantify your achievements.",
+    "solution": "Use numbers to showcase impact. For example, 'Increased app speed by 30%' is more powerful than 'Improved performance.'",
+    "category": "resume"
+  },
+  {
+    "question": "7. Avoid spelling and grammar mistakes.",
+    "solution": "Proofread thoroughly and use tools like Grammarly. Even a single typo can create a poor impression.",
+    "category": "resume"
+  },
+  {
+    "question": "8. Use bullet points instead of paragraphs.",
+    "solution": "Bullets make it easier for recruiters to scan your experience quickly and effectively.",
+    "category": "resume"
+  },
+  {
+    "question": "9. Highlight relevant academic projects.",
+    "solution": "Include short descriptions and your contributions. Emphasize outcomes and what technologies were used.",
+    "category": "resume"
+  },
+  {
+    "question": "10. Mention internships and freelance work.",
+    "solution": "These show practical experience and initiative. Even unpaid work can strengthen your resume.",
+    "category": "resume"
+  },
+  {
+    "question": "11. Use action verbs to start bullet points.",
+    "solution": "Start with words like 'Developed', 'Led', 'Implemented', 'Improved', etc., to convey responsibility and achievement.",
+    "category": "resume"
+  },
+  {
+    "question": "12. Avoid unnecessary personal details.",
+    "solution": "Skip irrelevant info like age, religion, or marital status unless the job requires it. Focus on professional details.",
+    "category": "resume"
+  },
+  {
+    "question": "13. Include a GitHub or portfolio link.",
+    "solution": "Showcase real work like code repositories or live projects. It adds credibility beyond the resume.",
+    "category": "resume"
+  },
+  {
+    "question": "14. Put your most relevant experience at the top.",
+    "solution": "Order content so that what matters most for the job appears early. Use reverse chronological format.",
+    "category": "resume"
+  },
+  {
+    "question": "15. Don’t lie or exaggerate.",
+    "solution": "Be honest. Falsifying skills or experiences can backfire during interviews or background checks.",
+    "category": "resume"
+  },
+  {
+    "question": "16. Include certifications and online courses.",
+    "solution": "Mention courses from platforms like Coursera, Udemy, or edX that are relevant to the job role.",
+    "category": "resume"
+  },
+  {
+    "question": "17. Use consistent formatting throughout.",
+    "solution": "Ensure consistent font size, date formats, and spacing. This reflects attention to detail.",
+    "category": "resume"
+  },
+  {
+    "question": "18. Avoid using generic resume templates.",
+    "solution": "Use customized templates that highlight your strengths clearly without unnecessary clutter.",
+    "category": "resume"
+  },
+  {
+    "question": "19. Add extracurriculars that show leadership or impact.",
+    "solution": "Activities like organizing college events or leading a team demonstrate soft skills valuable to employers.",
+    "category": "resume"
+  },
+  {
+    "question": "20. Mention languages and tools you’ve used hands-on.",
+    "solution": "Only list technologies you’ve actually used in projects or internships, not just what you’ve seen in tutorials.",
+    "category": "resume"
+  },
+
+  {
+    "question": "21. Keep section headings clear and simple.",
+    "solution": "Use headings like 'Education', 'Skills', 'Projects', and 'Experience' so recruiters can quickly locate information.",
+    "category": "resume"
+  },
+  {
+    "question": "22. Avoid using unprofessional email addresses.",
+    "solution": "Create a professional email with your name, e.g., firstname.lastname@gmail.com. Avoid nicknames or outdated domains.",
+    "category": "resume"
+  },
+  {
+    "question": "23. Add a short title below your name.",
+    "solution": "Include a role title such as 'Computer Science Graduate' or 'Aspiring Full Stack Developer' to create instant clarity.",
+    "category": "resume"
+  },
+  {
+    "question": "24. Keep file name professional when submitting.",
+    "solution": "Use a name like 'John_Doe_Resume.pdf' instead of generic names like 'ResumeFinal1.pdf'.",
+    "category": "resume"
+  },
+  {
+    "question": "25. Make sure hyperlinks work in your PDF.",
+    "solution": "Ensure links to GitHub, LinkedIn, or portfolios are clickable and open correctly when your resume is in PDF format.",
+    "category": "resume"
+  },
+  {
+    "question": "26. Emphasize teamwork and collaboration.",
+    "solution": "Use phrases like 'Worked in a team of 4' or 'Collaborated with designers' to highlight soft skills along with tech work.",
+    "category": "resume"
+  },
+  {
+    "question": "27. Include achievements under each experience.",
+    "solution": "Rather than listing duties, write about outcomes: e.g., 'Reduced app load time by 20%.'",
+    "category": "resume"
+  },
+  {
+    "question": "28. Keep margins and spacing readable.",
+    "solution": "Use margins of at least 0.5 inch and enough line spacing to make the resume easy to read both on-screen and printed.",
+    "category": "resume"
+  },
+  {
+    "question": "29. Mention soft skills through examples.",
+    "solution": "Rather than listing 'Leadership', show it with context: e.g., 'Led a 5-person team for XYZ project.'",
+    "category": "resume"
+  },
+  {
+    "question": "30. Don't include references on the resume.",
+    "solution": "It’s outdated to write 'References available on request.' Share references only when asked.",
+    "category": "resume"
+  },
+  {
+    "question": "31. Update your resume regularly.",
+    "solution": "Don't wait until job hunting starts. Update every time you finish a project, certification, or internship.",
+    "category": "resume"
+  },
+  {
+    "question": "32. Use bold text for section titles and companies.",
+    "solution": "Helps important elements stand out and improves overall readability.",
+    "category": "resume"
+  },
+  {
+    "question": "33. Avoid using passive voice.",
+    "solution": "Active voice sounds more confident. For example, use 'Built a website' instead of 'Website was built.'",
+    "category": "resume"
+  },
+  {
+    "question": "34. Use keywords from job descriptions.",
+    "solution": "Scan job posts for relevant terms and include them in your resume to improve ATS (Applicant Tracking System) visibility.",
+    "category": "resume"
+  },
+  {
+    "question": "35. Focus more on skills than job titles.",
+    "solution": "For students, it's more impactful to show what you did and learned than just naming roles.",
+    "category": "resume"
+  },
+  {
+    "question": "36. Mention your role in team projects clearly.",
+    "solution": "State your contribution like 'Developed the backend API for...' rather than just listing the project.",
+    "category": "resume"
+  },
+  {
+    "question": "37. Include links to any blog or article you've written.",
+    "solution": "Sharing writing on technical topics or experiences shows initiative and communication skills.",
+    "category": "resume"
+  },
+  {
+    "question": "38. Don't use tables or text boxes.",
+    "solution": "They may look good but break formatting when parsed by ATS software. Use plain formatting instead.",
+    "category": "resume"
+  },
+  {
+    "question": "39. Include location (city, state) even for remote roles.",
+    "solution": "It helps recruiters get context about time zones and relocation preferences.",
+    "category": "resume"
+  },
+  {
+    "question": "40. Show self-learning and passion projects.",
+    "solution": "Mention side projects you built to learn a new technology. Employers appreciate proactive learners.",
+    "category": "resume"
+  },
+  
+  {
+    "question": "41. Keep font size between 10 and 12 points.",
+    "solution": "Font that is too small is hard to read, and too large wastes space. Stick to 10–12pt for body text and slightly larger for headings.",
+    "category": "resume"
+  },
+  {
+    "question": "42. Avoid using personal photos.",
+    "solution": "Unless explicitly requested (e.g., for acting/modeling), photos are unnecessary and can introduce bias.",
+    "category": "resume"
+  },
+  {
+    "question": "43. Show consistency in verb tenses.",
+    "solution": "Use present tense for current roles and past tense for previous roles. Keep it consistent throughout the document.",
+    "category": "resume"
+  },
+  {
+    "question": "44. Don't include salary expectations or history.",
+    "solution": "This information should be discussed during interviews, not listed on your resume.",
+    "category": "resume"
+  },
+  {
+    "question": "45. Mention awards or honors if relevant.",
+    "solution": "Academic or project-based awards show achievement and recognition. List them under a separate section or within education.",
+    "category": "resume"
+  },
+  {
+    "question": "46. Include volunteering experience if relevant.",
+    "solution": "Volunteering shows initiative and a team-first attitude, especially if it involved leadership or technical contributions.",
+    "category": "resume"
+  },
+  {
+    "question": "47. List tools/platforms used in projects.",
+    "solution": "Mention tools like Git, Figma, VS Code, or cloud platforms used in real projects. It reflects practical experience.",
+    "category": "resume"
+  },
+  {
+    "question": "48. Use white space to your advantage.",
+    "solution": "Avoid clutter by spacing sections well. It improves readability and looks more professional.",
+    "category": "resume"
+  },
+  {
+    "question": "49. Mention relevant workshops or webinars attended.",
+    "solution": "Including such experiences shows your proactive learning and interest in industry trends.",
+    "category": "resume"
+  },
+  {
+    "question": "50. Avoid jargon or abbreviations without context.",
+    "solution": "Use full forms or explain briefly what a term means if it’s not commonly known.",
+    "category": "resume"
+  },
+  {
+    "question": "51. Use columns only if you're sure they will render properly.",
+    "solution": "Multi-column resumes may look messy when opened on different devices. Keep it simple if unsure.",
+    "category": "resume"
+  },
+  {
+    "question": "52. Include leadership roles in student organizations.",
+    "solution": "Showcase roles like President, Secretary, or Event Lead to highlight leadership and initiative.",
+    "category": "resume"
+  },
+  {
+    "question": "53. Keep file format in PDF unless asked otherwise.",
+    "solution": "PDF preserves your formatting across devices and platforms, making it the safest format for sharing.",
+    "category": "resume"
+  },
+  {
+    "question": "54. Avoid using the same resume for every job.",
+    "solution": "Customize based on job title, required skills, and company goals. Tailored resumes get more callbacks.",
+    "category": "resume"
+  },
+  {
+    "question": "55. Make your resume skimmable.",
+    "solution": "Recruiters spend ~6 seconds scanning resumes. Use bold, bullets, and concise language to stand out quickly.",
+    "category": "resume"
+  },
+  {
+    "question": "56. Mention KPIs or metrics where possible.",
+    "solution": "Key performance indicators like 'Reduced response time by 20%' help quantify your impact.",
+    "category": "resume"
+  },
+  {
+    "question": "57. Don't list every technology you've ever seen.",
+    "solution": "Only include tools and languages you have working knowledge of, preferably through real projects or internships.",
+    "category": "resume"
+  },
+  {
+    "question": "58. Align text to the left for easy reading.",
+    "solution": "Left-aligned text is easier to scan than centered or right-aligned paragraphs. Use it for all main content.",
+    "category": "resume"
+  },
+  {
+    "question": "59. Avoid using dense paragraphs.",
+    "solution": "Break text into bullets or short lines. Dense blocks are hard to read and easy to skip.",
+    "category": "resume"
+  },
+  {
+    "question": "60. Make your resume mobile-friendly.",
+    "solution": "Test your resume on a mobile device. Avoid formats that break when opened on smaller screens.",
+    "category": "resume"
+  },
+  
+  {
+    "question": "61. Mention languages spoken if relevant.",
+    "solution": "For roles involving communication or global collaboration, listing language proficiency can be a plus.",
+    "category": "resume"
+  },
+  {
+    "question": "62. Avoid using outdated buzzwords.",
+    "solution": "Terms like 'go-getter' or 'synergy' are vague. Focus on concrete achievements and skills instead.",
+    "category": "resume"
+  },
+  {
+    "question": "63. List achievements, not just responsibilities.",
+    "solution": "Instead of 'Responsible for database design', write 'Designed and optimized database schema for 3x faster queries.'",
+    "category": "resume"
+  },
+  {
+    "question": "64. Avoid colored text that may not print well.",
+    "solution": "Use dark text on a light background. Some ATS systems also have trouble with unusual colors.",
+    "category": "resume"
+  },
+  {
+    "question": "65. Do not include your full address.",
+    "solution": "City and state are sufficient. Full street addresses are unnecessary and may pose privacy concerns.",
+    "category": "resume"
+  },
+  {
+    "question": "66. Don't list irrelevant hobbies.",
+    "solution": "Only include interests that relate to the job or reflect valuable soft skills like leadership or creativity.",
+    "category": "resume"
+  },
+  {
+    "question": "67. Show growth in your roles.",
+    "solution": "Mention promotions, expanded responsibilities, or how your work evolved over time to show career progression.",
+    "category": "resume"
+  },
+  {
+    "question": "68. Don’t overuse bold or italic fonts.",
+    "solution": "Highlight sparingly to emphasize key points. Overuse makes content harder to scan.",
+    "category": "resume"
+  },
+  {
+    "question": "69. Include links to apps or websites you built.",
+    "solution": "If you’ve built live projects, add links so recruiters can see your work directly.",
+    "category": "resume"
+  },
+  {
+    "question": "70. Use bullet points with a consistent structure.",
+    "solution": "Start with a strong action verb, include a task, and end with a result or outcome.",
+    "category": "resume"
+  },
+  {
+    "question": "71. Avoid filler phrases like 'Hard-working' without proof.",
+    "solution": "Demonstrate qualities like hard work through achievements and responsibilities, not just adjectives.",
+    "category": "resume"
+  },
+  {
+    "question": "72. Remove older high school details if you’re a college graduate.",
+    "solution": "After college, your high school academic record becomes less relevant. Focus on higher education.",
+    "category": "resume"
+  },
+  {
+    "question": "73. Avoid using emojis or icons.",
+    "solution": "They may look unprofessional or fail to render correctly in ATS or PDF formats.",
+    "category": "resume"
+  },
+  {
+    "question": "74. Include a brief section on relevant coursework.",
+    "solution": "For students, listing key coursework like Data Structures or Operating Systems helps show domain exposure.",
+    "category": "resume"
+  },
+  {
+    "question": "75. Don’t rely only on templates from job portals.",
+    "solution": "While convenient, default templates are often generic. Customize them to stand out and reflect your personality.",
+    "category": "resume"
+  },
+  {
+    "question": "76. Highlight achievements in bullet form under each role.",
+    "solution": "This makes your impact clearer. For example, 'Improved system efficiency by 25% through code refactor.'",
+    "category": "resume"
+  },
+  {
+    "question": "77. Don’t leave unexplained gaps in experience.",
+    "solution": "Briefly mention productive activities during career breaks, such as learning, volunteering, or freelancing.",
+    "category": "resume"
+  },
+  {
+    "question": "78. Don’t include multiple phone numbers or emails.",
+    "solution": "Stick to one professional number and one email to avoid confusion and ensure clear contact.",
+    "category": "resume"
+  },
+  {
+    "question": "79. Be honest about your experience and skills.",
+    "solution": "Exaggerating can lead to failed interviews or damaged credibility. Highlight your real strengths.",
+    "category": "resume"
+  },
+  {
+    "question": "80. Tailor the resume title to the job role.",
+    "solution": "Instead of just 'Resume', use 'Full Stack Developer Resume – John Doe' to appear more targeted.",
+    "category": "resume"
+  },
+  
+  {
+    "question": "81. Mention hackathons and coding contests.",
+    "solution": "Participation in coding competitions shows initiative, teamwork, and problem-solving under pressure.",
+    "category": "resume"
+  },
+  {
+    "question": "82. Link to your LinkedIn profile.",
+    "solution": "Ensure your LinkedIn is updated and matches your resume. It can provide more depth to your background.",
+    "category": "resume"
+  },
+  {
+    "question": "83. Avoid using overly creative job titles.",
+    "solution": "Stick with conventional titles like 'Software Intern' or 'Frontend Developer' to avoid confusion in ATS systems.",
+    "category": "resume"
+  },
+  {
+    "question": "84. Keep layout aligned and clean.",
+    "solution": "Check that bullets, headings, and dates are aligned properly. Consistency improves readability.",
+    "category": "resume"
+  },
+  {
+    "question": "85. Use hyphens or en-dashes consistently for date ranges.",
+    "solution": "Write dates like 'May 2023 – August 2023' using consistent formatting throughout your resume.",
+    "category": "resume"
+  },
+  {
+    "question": "86. Include remote work experience explicitly.",
+    "solution": "Mention 'Remote' in the location or description to show adaptability to modern work environments.",
+    "category": "resume"
+  },
+  {
+    "question": "87. Highlight your role in team achievements.",
+    "solution": "Rather than just the team’s success, emphasize your specific contribution within the team.",
+    "category": "resume"
+  },
+  {
+    "question": "88. Emphasize transferable skills.",
+    "solution": "Skills like leadership, communication, and critical thinking are valuable across different roles and industries.",
+    "category": "resume"
+  },
+  {
+    "question": "89. Use consistent capitalization style.",
+    "solution": "Decide between Title Case or Sentence case and apply it uniformly across headings and bullet points.",
+    "category": "resume"
+  },
+  {
+    "question": "90. Save your resume as a PDF before sending.",
+    "solution": "PDFs lock formatting in place and ensure that your layout stays intact regardless of the viewer’s device or software.",
+    "category": "resume"
+  },
+  {
+    "question": "91. Check file size when uploading online.",
+    "solution": "Keep the file under 1MB unless it includes graphics. Large files may fail to upload or get ignored.",
+    "category": "resume"
+  },
+  {
+    "question": "92. Use simple icons if needed, but test compatibility.",
+    "solution": "Minimal icons for email, phone, or LinkedIn are okay if they render well in PDF and ATS software.",
+    "category": "resume"
+  },
+  {
+    "question": "93. Avoid repetition of common skills.",
+    "solution": "Don’t list the same skills across multiple sections. Mention once with context for impact.",
+    "category": "resume"
+  },
+  {
+    "question": "94. Avoid passive statements like 'was involved in...'",
+    "solution": "Be direct and confident. Use phrases like 'Developed', 'Built', or 'Led' to show ownership.",
+    "category": "resume"
+  },
+  {
+    "question": "95. Make sure there are no formatting issues when printed.",
+    "solution": "Do a test print or save as a print-ready PDF. Check margins, spacing, and legibility.",
+    "category": "resume"
+  },
+  {
+    "question": "96. List employment gaps only if they’re long or significant.",
+    "solution": "Short gaps don’t need explanation. For longer ones, briefly mention learning, caregiving, or travel.",
+    "category": "resume"
+  },
+  {
+    "question": "97. Mention location flexibility if open to relocation.",
+    "solution": "Include a short line like 'Open to relocation' to increase opportunities, especially for freshers.",
+    "category": "resume"
+  },
+  {
+    "question": "98. Use job title-specific keywords for better visibility.",
+    "solution": "If applying for a 'Backend Developer' role, include keywords like 'API', 'Node.js', and 'Databases' in context.",
+    "category": "resume"
+  },
+  {
+    "question": "99. Ensure your resume aligns with your online presence.",
+    "solution": "Keep GitHub, LinkedIn, and portfolio sites updated with the same timeline and content for consistency.",
+    "category": "resume"
+  },
+  {
+    "question": "100. Have someone else review your resume.",
+    "solution": "A second opinion helps catch mistakes and ensures your resume is easy to read and impactful.",
+    "category": "resume"
+  },
+  {
+    "question": "1. GeeksforGeeks – DSA Practice",
+    "solution": "Comprehensive platform for practicing data structures and algorithms: https://practice.geeksforgeeks.org/",
+    "category": "resources"
+  },
+  {
+    "question": "2. LeetCode – Coding Interview Prep",
+    "solution": "Practice DSA problems sorted by difficulty and company tags: https://leetcode.com",
+    "category": "resources"
+  },
+  {
+    "question": "3. HackerRank – Interview Preparation Kit",
+    "solution": "Guided tracks for coding problems and interview topics: https://www.hackerrank.com/interview/interview-preparation-kit",
+    "category": "resources"
+  },
+  {
+    "question": "4. Striver’s A2Z DSA Sheet",
+    "solution": "Popular DSA problem sheet curated by Striver (Raj Vikramaditya): https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/",
+    "category": "resources"
+  },
+  {
+    "question": "5. Cracking the Coding Interview Book",
+    "solution": "A classic book with 189 real interview questions and solutions, ideal for system design and behavioral prep.",
+    "category": "resources"
+  },
+  {
+    "question": "6. Tech Interview Handbook",
+    "solution": "Free curated resources, best practices, and questions for tech interviews: https://www.techinterviewhandbook.org/",
+    "category": "resources"
+  },
+  {
+    "question": "7. InterviewBit",
+    "solution": "DSA problems and company interview experiences: https://www.interviewbit.com/",
+    "category": "resources"
+  },
+  {
+    "question": "8. Glassdoor – Interview Reviews",
+    "solution": "Company-wise interview questions and experiences from past candidates: https://www.glassdoor.com/",
+    "category": "resources"
+  },
+  {
+    "question": "9. JavaTpoint – Core Java Guide",
+    "solution": "Great place to revise Java fundamentals before interviews: https://www.javatpoint.com/java-tutorial",
+    "category": "resources"
+  },
+  {
+    "question": "10. Toptal – System Design Interview Guide",
+    "solution": "Structured guide for beginners in system design: https://www.toptal.com/software/systems-design-interview",
+    "category": "resources"
+  },
+  {
+    "question": "11. Coding Ninjas Studio – Company-wise Problems",
+    "solution": "Practice problems from real company interviews: https://www.naukri.com/code360/",
+    "category": "resources"
+  },
+  {
+    "question": "12. Codeforces – Competitive Programming",
+    "solution": "Platform for contests, problemsets, and rated challenges: https://codeforces.com",
+    "category": "resources"
+  },
+  {
+    "question": "13. Coursera – Algorithms Specialization (Stanford)",
+    "solution": "Taught by Prof. Tim Roughgarden: https://www.coursera.org/specializations/algorithms",
+    "category": "resources"
+  },
+  {
+    "question": "14. Edyst – Placement Courses",
+    "solution": "Placement bootcamps, coding practice and resume building: https://www.edyst.com/",
+    "category": "resources"
+  },
+  {
+    "question": "15. MIT OpenCourseWare – Intro to Algorithms",
+    "solution": "Video lectures and assignments from MIT’s algorithm course: https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/",
+    "category": "resources"
+  },
+  {
+    "question": "16. IndiaBix – Aptitude Questions",
+    "solution": "Solved questions in quantitative aptitude, reasoning and verbal: https://www.indiabix.com/",
+    "category": "resources"
+  },
+  {
+    "question": "17. PrepInsta",
+    "solution": "Placement prep for companies like TCS, Infosys, Wipro, with past year questions: https://prepinsta.com/",
+    "category": "resources"
+  },
+  {
+    "question": "18. Resume Worded",
+    "solution": "Free resume scanner and LinkedIn profile checker: https://resumeworded.com/",
+    "category": "resources"
+  },
+  {
+    "question": "19. AlgoExpert",
+    "solution": "Paid platform with video explanations and mock interviews: https://www.algoexpert.io/",
+    "category": "resources"
+  },
+  {
+    "question": "20. FreeCodeCamp – Full Stack Curriculum",
+    "solution": "Free full-stack web development course: https://www.freecodecamp.org/learn",
+    "category": "resources"
+  },
+  {
+    "question": "21. GitHub – Awesome Interview Questions",
+    "solution": "Curated list of questions across languages and domains: https://github.com/DopplerHQ/awesome-interview-questions",
+    "category": "resources"
+  },
+  {
+    "question": "22. Simplilearn – Aptitude Tutorials",
+    "solution": "Free tutorials and practice problems for aptitude and logical reasoning: https://www.simplilearn.com/aptitude-tutorial-article",
+    "category": "resources"
+  },
+  {
+    "question": "23. CS50 by Harvard",
+    "solution": "Harvard’s famous intro to computer science course: https://cs50.harvard.edu/",
+    "category": "resources"
+  },
+  {
+    "question": "24. CodeChef – Competitive Programming",
+    "solution": "Practice DSA and participate in contests: https://www.codechef.com/",
+    "category": "resources"
+  },
+  {
+    "question": "25. DevDocs – API Documentation",
+    "solution": "Searchable documentation for all major programming languages and libraries: https://devdocs.io/",
+    "category": "resources"
+  },
+  {
+    "question": "26. CareerCup – Interview Questions",
+    "solution": "Company interview questions posted by users: https://www.careercup.com/",
+    "category": "resources"
+  },
+  {
+    "question": "27. Byte by Byte",
+    "solution": "Specializes in system design and whiteboard interview coaching: https://www.byte-by-byte.com/",
+    "category": "resources"
+  },
+  {
+    "question": "28. HackerEarth – Coding Challenges",
+    "solution": "Practice problems and company hiring contests: https://www.hackerearth.com/",
+    "category": "resources"
+  },
+  {
+    "question": "29. Resume.io",
+    "solution": "Professional resume builder with templates and examples: https://resume.io/",
+    "category": "resources"
+  },
+  {
+    "question": "30. Internshala – Internships & Training",
+    "solution": "Apply for internships and get trained in placement skills: https://internshala.com/",
+    "category": "resources"
+  },
+  {
+    "question": "31. Big-O Cheat Sheet",
+    "solution": "Reference chart of time/space complexities: https://www.bigocheatsheet.com/",
+    "category": "resources"
+  },
+  {
+    "question": "32. System Design Primer GitHub",
+    "solution": "Complete guide to system design interviews: https://github.com/donnemartin/system-design-primer",
+    "category": "resources"
+  },
+  {
+    "question": "33. Educative – Grokking the Coding Interview",
+    "solution": "Paid but widely used for patterns in coding interviews: https://www.educative.io/courses/grokking-the-coding-interview",
+    "category": "resources"
+  },
+  {
+    "question": "34. TopCoder",
+    "solution": "Challenging problems and a thriving competitive programming community: https://www.topcoder.com/",
+    "category": "resources"
+  },
+  {
+    "question": "35. LinkedIn Learning",
+    "solution": "Courses on job prep, resume writing, and tech skills: https://www.linkedin.com/learning/",
+    "category": "resources"
+  },
+  {
+    "question": "36. Microsoft Learn",
+    "solution": "Free learning paths for Azure, .NET, and backend development: https://learn.microsoft.com/",
+    "category": "resources"
+  },
+  {
+    "question": "37. Python Tutor",
+    "solution": "Visualize Python, Java, C, and C++ code execution: https://pythontutor.com/",
+    "category": "resources"
+  },
+  {
+    "question": "38. Zety Resume Builder",
+    "solution": "Create modern resumes with AI tips and templates: https://zety.com/resume-builder",
+    "category": "resources"
+  },
+  {
+    "question": "39. AlgoDaily",
+    "solution": "Daily algorithm problems and explanations: https://algodaily.com/",
+    "category": "resources"
+  },
+  {
+    "question": "40. Mockaroo – Data Generator",
+    "solution": "Generate realistic mock data for testing or interviews: https://www.mockaroo.com/",
+    "category": "resources"
+  },
+  {
+    "question": "41. Pramp – Free Mock Interviews",
+    "solution": "Practice peer-to-peer technical interviews: https://www.pramp.com/",
+    "category": "resources"
+  },
+  {
+    "question": "42. Exponent",
+    "solution": "Interview prep platform for tech, product, and behavioral rounds: https://www.tryexponent.com/",
+    "category": "resources"
+  },
+  {
+    "question": "43. CodeGym – Java Practice",
+    "solution": "Java-focused coding challenges for beginners and intermediates: https://codegym.cc/",
+    "category": "resources"
+  },
+  {
+    "question": "44. Dev.to",
+    "solution": "Developer blog platform with real experiences, guides, and advice: https://dev.to/",
+    "category": "resources"
+  },
+  {
+    "question": "45. Turing – Remote Developer Jobs",
+    "solution": "Platform for landing international remote jobs with interview prep: https://www.turing.com/",
+    "category": "resources"
+  },
+  {
+    "question": "46. RemoteOK",
+    "solution": "Job board focused on remote tech opportunities: https://remoteok.com/",
+    "category": "resources"
+  },
+  {
+    "question": "47. Resume Genius",
+    "solution": "Simple resume builder with expert tips: https://resumegenius.com/",
+    "category": "resources"
+  },
+  {
+    "question": "48. CS50 Beyond – Advanced Web Dev",
+    "solution": "Follow-up course to CS50 with React, Firebase, and more: https://cs50.harvard.edu/beyond/",
+    "category": "resources"
+  },
+  {
+    "question": "49. OneMonth – Learn to Code in 30 Days",
+    "solution": "Structured courses for full stack, SQL, and Python: https://onemonth.com/",
+    "category": "resources"
+  },
+  {
+    "question": "50. Excalidraw – Design System Diagrams",
+    "solution": "Tool to draw neat, hand-drawn-style diagrams for system design: https://excalidraw.com/",
+    "category": "resources"
+  }
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Placement Hub - Home</title>
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: #f5f5f5;
+    }
+
+    .home-container {
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .home-container h2 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    .home-container p {
+      font-size: 1.1rem;
+      color: #bbbbbb;
+      max-width: 700px;
+      margin: 0 auto 1.8rem;
+    }
+
+    .tagline {
+      font-style: italic;
+      color: #66aaff;
+    }
+
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      width: 250px;
+      transition: transform 0.2s ease, border 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #66aaff;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #cce6ff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: inline-block;
+    }
+
+    .card a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Placement Hub</h1>
+    <nav>
+      <a href="/category/dsa">DSA</a>
+      <a href="/category/aptitude">Aptitude</a>
+      <a href="/category/interview">Interview</a>
+      <a href="/category/resume">Resume</a>
+      <a href="/category/resources">Resources</a>
+      <a href="/admin" class="add">+ Add Question</a>
+    </nav>
+  </header>
+
+  <div class="home-container">
+    <h2>Welcome to Placement Hub</h2>
+    <p class="tagline">Your all-in-one platform to ace placements!</p>
+    <p>Sharpen your coding, aptitude, and interview skills. Get resume tips and access curated resources — all in one place.</p>
+
+    <div class="card-grid">
+      <div class="card"><a href="/category/dsa">📘 Data Structures & Algorithms</a></div>
+      <div class="card"><a href="/category/aptitude">🧠 Aptitude Preparation</a></div>
+      <div class="card"><a href="/category/interview">👔 Interview Questions</a></div>
+      <div class="card"><a href="/category/resume">📄 Resume Tips</a></div>
+      <div class="card"><a href="/category/resources">🔗 Resources & Links</a></div>
+    </div>
+  </div>
+</body>
+</html>
