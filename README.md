@@ -9,7 +9,7 @@ Unlike traditional preparation platforms that require logins, premium access, or
 - Frontend: HTML, CSS, JavaScript
 - Backend: Python (Flask)
 - Database: SQLite
-- Deployment: GitHub Pages (Frontend), Render or Railway (Backend)
+- Deployment: GitHub Pages (Frontend), Render(Backend)
 
 ## Key Features
 
@@ -30,9 +30,6 @@ Most platforms only cover one or two aspects of placement prep, often requiring 
 - It provides a smooth, focused experience for quick revisions or deep preparation
 - It is designed to be lightweight and accessible on any device
 
-## Live Demo
-
-https://your-username.github.io/placement-hub
 
 ## How to Use
 
