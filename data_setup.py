@@ -3,43 +3,45 @@ import sqlite3
 
 print("📢 Running FINAL data_setup.py")
 
-# Connect to the SQLite database
-conn = sqlite3.connect('placementhub.db')
-cursor = conn.cursor()
-
 # Load JSON data
-with open('questions.json', 'r', encoding='utf-8') as f:
+with open("questions.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
-# If nested list (e.g. [[{}, {}, ...]]) flatten it
-if isinstance(data, list) and len(data) == 1 and isinstance(data[0], list):
-    data = data[0]
+conn = sqlite3.connect("placementhub.db")
+cursor = conn.cursor()
 
-# Validate top-level data
-if not isinstance(data, list):
-    raise ValueError("❌ JSON must contain a list of questions.")
+inserted = 0
 
-count = 0
-
-# Insert into database
-for q in data:
+for item in data:
     try:
-        if q['category'] == 'dsa':
-            cursor.execute('''
-                INSERT INTO questions (question, solution_py, solution_java, category)
-                VALUES (?, ?, ?, ?)
-            ''', (q['question'], q['solution_py'], q['solution_java'], q['category']))
-        else:
-            cursor.execute('''
-                INSERT INTO questions (question, solution_py, solution_java, category)
-                VALUES (?, ?, ?, ?)
-            ''', (q['question'], q['solution'], '', q['category']))
-        count += 1
-    except Exception as e:
-        print(f"⚠️ Skipped: {q.get('question', '[unknown]')} - {e}")
+        question = item["question"]
+        category = item["category"].strip().lower()
 
-# Commit and close
+        # Default values
+        solution = ""
+        solution_py = ""
+        solution_java = ""
+
+        if category == "dsa":
+            solution_py = item.get("solution_py", "")
+            solution_java = item.get("solution_java", "")
+        else:
+            solution = item.get("solution", "")
+
+        cursor.execute(
+            """
+            INSERT INTO questions (question, solution, solution_py, solution_java, category)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (question, solution, solution_py, solution_java, category)
+        )
+
+        inserted += 1
+
+    except KeyError as e:
+        print(f"⚠️ Skipped: {item.get('question', 'UNKNOWN')} - missing {e}")
+
 conn.commit()
 conn.close()
 
-print(f"\n✅ Inserted {count} questions into the database.")
+print(f"✅ Inserted {inserted} questions into the database.")

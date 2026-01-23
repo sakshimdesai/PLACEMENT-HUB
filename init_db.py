@@ -8,6 +8,7 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS questions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     question TEXT NOT NULL,
+    solution TEXT,
     solution_py TEXT,
     solution_java TEXT,
     category TEXT NOT NULL
